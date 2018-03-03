@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
 # C extensions
 *.so
 
