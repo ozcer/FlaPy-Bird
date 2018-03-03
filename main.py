@@ -1,28 +1,44 @@
 import sys
 
-import pygame as pg
+import pygame
 from pygame.locals import *
 
 from src.const import *
+from src.player import Player
 
-
-class Game():
-    def __init__(self):
-        self.surface = pg.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
-        pg.display.set_caption(CAPTION)
-        pg.init()
-        
-        self.run()
+class Game:
+    surface = None
+    sprite_groups = ["players", "walls"]
+    entities = {sp: pygame.sprite.Group() for sp in sprite_groups}
+    fps_clock = pygame.time.Clock()
     
-    def run(self):
+    def __init__(self):
+        Game.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
+        pygame.display.set_caption(CAPTION)
+        pygame.init()
+        
+        player = Player((100, 100), (50, 50))
+        Game.entities["players"].add(player)
+        
+        Game.run()
+    
+        
+    @staticmethod
+    def run():
         while True:
-            self.surface.fill(LIGHTGREY)
+            Game.surface.fill(LIGHTGREY)
             
-            for event in pg.event.get():
+            for group in Game.entities:
+                Game.entities[group].draw(Game.surface)
+                Game.entities[group].update()
+                
+            for event in pygame.event.get():
                 if event.type == QUIT:
-                    pg.quit()
+                    pygame.quit()
                     sys.exit()
-            pg.display.update()
+                    
+            pygame.display.update()
+            Game.fps_clock.tick(FPS)
 
 
 if __name__ == "__main__":
