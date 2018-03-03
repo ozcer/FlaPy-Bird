@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 
 from src.const import *
 
@@ -19,12 +20,24 @@ class Player(pygame.sprite.Sprite):
         self.dy = 0
         
     
+    
     def update(self):
+        keys = pygame.key.get_pressed()
+        if keys[K_SPACE] and self.dy > -1:
+            self.dy -= 10
+        
         # gravity
-        if self.rect.y < DISPLAY_HEIGHT:
-            self.dy += GRAV
-
+        if self.rect.bottom < DISPLAY_HEIGHT:
+            self.dy += GRAV if self.dy < TERM_VEL else 0
+        else:
+            self.dy = 0
+        
+        
+        # apply kinematics
         self.x += self.dx
         self.y += self.dy
-        
         self.rect.center = self.x, self.y
+
+        print(self.dy)
+        
+        
