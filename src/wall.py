@@ -10,13 +10,12 @@ class Wall(pygame.sprite.Sprite):
         self.x, self.y = pos
         self.width, self.height = dim
         
-        # red rect
         self.image = pygame.Surface(dim)
         self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         
         # kinematics
-        self.dx = -3
+        self.dx = -2
         self.dy = 0
 
     def update(self):

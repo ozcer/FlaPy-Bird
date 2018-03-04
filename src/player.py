@@ -22,8 +22,6 @@ class Player(pygame.sprite.Sprite):
     
     
     def update(self):
-        
-        
         # gravity
         if self.rect.bottom < DISPLAY_HEIGHT:
             self.dy += GRAV if self.dy < TERM_VEL else 0
