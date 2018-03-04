@@ -13,16 +13,16 @@ class Game:
     entities = {sp: pygame.sprite.Group() for sp in sprite_groups}
     fps_clock = pygame.time.Clock()
     
-    wallCd = WALL_RATE
+    wallCd = WALL_RATE/2
+
+    player = Player((200, 100))
+    entities["players"].add(player)
     
     def __init__(self):
         Game.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
         pygame.display.set_caption(CAPTION)
         pygame.init()
 
-        player = Player((100, 100))
-        Game.entities["players"].add(player)
-        
         Game.run()
     
         
@@ -35,18 +35,24 @@ class Game:
                 Game.entities[group].update()
                 Game.entities[group].draw(Game.surface)
                 
-            
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-            
-            if Game.wallCd == 0:
+                
+            # wall creation
+            if Game.wallCd <= 0:
                 Game.wallCd = WALL_RATE
                 Game.make_walls()
-
             Game.wallCd -= 1
             
+            # collision
+            collision = pygame.sprite.groupcollide(Game.entities["walls"], Game.entities["players"], False, False)
+            if collision:
+                for wall in collision:
+                    collision[wall][0].hit = True
+                    wall.hit = True
+                    
             pygame.display.update()
             Game.fps_clock.tick(FPS)
 
