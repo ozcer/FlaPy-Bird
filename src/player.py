@@ -5,7 +5,7 @@ from src.const import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, dim=(30,30)):
+    def __init__(self, pos, dim=(20,20)):
         pygame.sprite.Sprite.__init__(self)
         self.x, self.y = pos
         self.width, self.height = dim
@@ -20,7 +20,6 @@ class Player(pygame.sprite.Sprite):
         self.dy = 0
         
     
-    
     def update(self):
         # gravity
         if self.rect.bottom < DISPLAY_HEIGHT:
@@ -28,7 +27,8 @@ class Player(pygame.sprite.Sprite):
         else:
             self.y = DISPLAY_HEIGHT - (self.rect.height/2)
             self.dy = 0
-
+        
+        # jumping
         keys = pygame.key.get_pressed()
         if keys[K_SPACE] and self.dy >= 0:
             self.dy -= 10
@@ -37,6 +37,3 @@ class Player(pygame.sprite.Sprite):
         self.x += self.dx
         self.y += self.dy
         self.rect.center = self.x, self.y
-
-        
-        

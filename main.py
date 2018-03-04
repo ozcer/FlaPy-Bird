@@ -19,12 +19,9 @@ class Game:
         Game.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
         pygame.display.set_caption(CAPTION)
         pygame.init()
-        
-        player = Player((100, 100), (50, 50))
+
+        player = Player((100, 100))
         Game.entities["players"].add(player)
-        
-        # con = Controller()
-        # Game.entities["controller"].add(con)
         
         Game.run()
     
@@ -35,9 +32,10 @@ class Game:
             Game.surface.fill(LIGHTGREY)
             
             for group in Game.entities:
-                Game.entities[group].draw(Game.surface)
                 Game.entities[group].update()
+                Game.entities[group].draw(Game.surface)
                 
+            
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -46,6 +44,7 @@ class Game:
             if Game.wallCd == 0:
                 Game.wallCd = WALL_RATE
                 Game.make_walls()
+
             Game.wallCd -= 1
             
             pygame.display.update()
