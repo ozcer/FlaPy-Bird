@@ -1,10 +1,12 @@
 import sys
-
+import random
 import pygame
 from pygame.locals import *
 
 from src.const import *
 from src.player import Player
+from src.wall import Wall
+
 
 class Game:
     surface = None
@@ -19,6 +21,8 @@ class Game:
         
         player = Player((100, 100), (50, 50))
         Game.entities["players"].add(player)
+        
+        Game.make_walls()
         
         Game.run()
     
@@ -39,7 +43,22 @@ class Game:
                     
             pygame.display.update()
             Game.fps_clock.tick(FPS)
-
-
+    
+    @staticmethod
+    def make_walls():
+        gap_height = random.randint(0, DISPLAY_HEIGHT)
+        gap_top = gap_height - GAP_SIZE / 2
+        gap_bottom = gap_height + GAP_SIZE / 2
+    
+        top_height = gap_top
+        top_wall = Wall((DISPLAY_WIDTH, top_height / 2), (20, top_height))
+        Game.entities["walls"].add(top_wall)
+    
+        bottom_height = DISPLAY_HEIGHT - gap_bottom
+        print(f"bottom_height={bottom_height}")
+        bottom_wall = Wall((DISPLAY_WIDTH, gap_bottom + bottom_height / 2), (20, bottom_height))
+        Game.entities["walls"].add(bottom_wall)
+        
+        
 if __name__ == "__main__":
     Game()

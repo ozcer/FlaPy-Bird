@@ -16,3 +16,5 @@ YELLOW = (255, 255, 0)
 # physics
 GRAV = .5
 TERM_VEL = 10
+
+GAP_SIZE = 150
