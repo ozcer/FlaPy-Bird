@@ -19,7 +19,7 @@ class Game:
         self.entities = {sp: pygame.sprite.Group() for sp in self.sprite_groups}
         
         # init player spawn
-        player = Player((200, 100))
+        player = Player(self, (200, 100))
         self.entities["players"].add(player)
         
         # init wall cd
@@ -53,7 +53,7 @@ class Game:
             collision = pygame.sprite.groupcollide(self.entities["walls"], self.entities["players"], False, False)
             if collision:
                 for wall in collision:
-                    collision[wall][0].hit = True
+                    collision[wall][0].alive = False
                     wall.hit = True
                     
             pygame.display.update()
@@ -63,13 +63,15 @@ class Game:
         gap_height = random.randint(GAP_SIZE/2, DISPLAY_HEIGHT-GAP_SIZE/2)
         gap_top = gap_height - GAP_SIZE / 2
         gap_bottom = gap_height + GAP_SIZE / 2
-    
+        
+        # top wall
         top_height = gap_top
-        top_wall = Wall((DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
+        top_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
         self.entities["walls"].add(top_wall)
     
+        # bottom wall
         bottom_height = DISPLAY_HEIGHT - gap_bottom
-        bottom_wall = Wall((DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
+        bottom_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
         self.entities["walls"].add(bottom_wall)
         
         

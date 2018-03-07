@@ -7,8 +7,10 @@ from src.const import *
 
 
 class Wall(pygame.sprite.Sprite):
-    def __init__(self, pos, dim):
+    def __init__(self, game, pos, dim):
         pygame.sprite.Sprite.__init__(self)
+        self.game = game
+
         self.x, self.y = pos
         self.width, self.height = dim
         self.image = pygame.Surface(dim)

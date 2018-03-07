@@ -15,7 +15,10 @@ YELLOW = (255, 255, 0)
 
 # physics
 GRAV = .5
-TERM_VEL = 10
+TERM_VEL = 6
+
+# player
+MAX_PLAYER_UP_SPEED = 4
 
 # wall
 WALL_WIDTH = 30

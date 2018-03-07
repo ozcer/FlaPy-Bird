@@ -5,9 +5,11 @@ from src.const import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos,):
+    def __init__(self, game, pos,):
         pygame.sprite.Sprite.__init__(self)
-
+        self.game = game
+        
+        
         # sprite
         self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
                         "fall": pygame.image.load("sprites/fall.png")}
@@ -20,28 +22,38 @@ class Player(pygame.sprite.Sprite):
         self.width = self.rect.width
         self.height = self.rect.height
         
-        
         # kinematics
         self.dx = 0
         self.dy = 0
         
-        self.hit = False
+        self.alive = True
     
-    # def draw(self, surface):
-    #     surface.blit(self.image, (self.x, self.y), (self.sprite_index*self.width, 0, self.width, self.height))
-    
+    def handle_input(self):
+        keys = pygame.key.get_pressed()
+        if self.alive:
+            # up
+            if keys[K_w] and self.dy > -MAX_PLAYER_UP_SPEED:
+                self.dy -= 1
+                
+            if keys[K_d]:
+                self.dx = 3
+            elif keys[K_a]:
+                self.dx = -3
+            else:
+                self.dx = 0
+        
     def update(self):
-        if not self.hit:
-            # jumping
-            keys = pygame.key.get_pressed()
-            if keys[K_SPACE] and self.dy >= 0:
-                self.dy -= 10
+        self.handle_input()
 
         self.image = self.sprites["jump"] if self.dy < 0 else self.sprites["fall"]
         
         # gravity
         self.dy += GRAV if self.dy < TERM_VEL else 0
         
+        # off screen death
+        if not (0 < self.x < DISPLAY_WIDTH and 0 < self.y < DISPLAY_HEIGHT):
+            self.alive = True # False
+
         # apply kinematics
         self.x += self.dx
         self.y += self.dy
