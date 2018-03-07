@@ -8,32 +8,35 @@ from src.player import Player
 from src.wall import Wall
 
 class Game:
-    surface = None
-    sprite_groups = ["players", "walls"]
-    entities = {sp: pygame.sprite.Group() for sp in sprite_groups}
-    fps_clock = pygame.time.Clock()
-    
-    wallCd = WALL_RATE/2
-
-    player = Player((200, 100))
-    entities["players"].add(player)
     
     def __init__(self):
-        Game.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
+        # surfaces
+        self.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
         pygame.display.set_caption(CAPTION)
         pygame.init()
+    
+        self.sprite_groups = ["players", "walls"]
+        self.entities = {sp: pygame.sprite.Group() for sp in self.sprite_groups}
+        
+        # init player spawn
+        player = Player((200, 100))
+        self.entities["players"].add(player)
+        
+        # init wall cd
+        self.wallCd = WALL_RATE / 2
 
-        Game.run()
+        self.fps_clock = pygame.time.Clock()
+        
+        self.run()
     
         
-    @staticmethod
-    def run():
+    def run(self):
         while True:
-            Game.surface.fill(LIGHTGREY)
+            self.surface.fill(LIGHTGREY)
             
-            for group in Game.entities:
-                Game.entities[group].update()
-                Game.entities[group].draw(Game.surface)
+            for group in self.entities:
+                self.entities[group].update()
+                self.entities[group].draw(self.surface)
                 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -41,34 +44,33 @@ class Game:
                     sys.exit()
                 
             # wall creation
-            if Game.wallCd <= 0:
-                Game.wallCd = WALL_RATE
-                Game.make_walls()
-            Game.wallCd -= 1
+            if self.wallCd <= 0:
+                self.wallCd = WALL_RATE
+                self.make_walls()
+            self.wallCd -= 1
             
             # collision
-            collision = pygame.sprite.groupcollide(Game.entities["walls"], Game.entities["players"], False, False)
+            collision = pygame.sprite.groupcollide(self.entities["walls"], self.entities["players"], False, False)
             if collision:
                 for wall in collision:
                     collision[wall][0].hit = True
                     wall.hit = True
                     
             pygame.display.update()
-            Game.fps_clock.tick(FPS)
+            self.fps_clock.tick(FPS)
 
-    @staticmethod
-    def make_walls():
+    def make_walls(self):
         gap_height = random.randint(GAP_SIZE/2, DISPLAY_HEIGHT-GAP_SIZE/2)
         gap_top = gap_height - GAP_SIZE / 2
         gap_bottom = gap_height + GAP_SIZE / 2
     
         top_height = gap_top
         top_wall = Wall((DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
-        Game.entities["walls"].add(top_wall)
+        self.entities["walls"].add(top_wall)
     
         bottom_height = DISPLAY_HEIGHT - gap_bottom
         bottom_wall = Wall((DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
-        Game.entities["walls"].add(bottom_wall)
+        self.entities["walls"].add(bottom_wall)
         
         
 if __name__ == "__main__":

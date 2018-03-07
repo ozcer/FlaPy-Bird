@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
 
         # sprite
         self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
-                       "fall": pygame.image.load("sprites/fall.png")}
+                        "fall": pygame.image.load("sprites/fall.png")}
         self.image = self.sprites["fall"]
 
         self.x, self.y = pos
