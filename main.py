@@ -6,6 +6,7 @@ from pygame.locals import *
 from src.const import *
 from src.player import Player
 from src.wall import Wall
+from src.HUD import HUD
 
 class Game:
     
@@ -17,19 +18,21 @@ class Game:
     
         self.sprite_groups = ["players", "walls"]
         self.entities = {sp: pygame.sprite.Group() for sp in self.sprite_groups}
+
+        self.fps_clock = pygame.time.Clock()
+        self.hud = HUD(self)
         
+        self.set_up()
+        self.run()
+    
+    def set_up(self):
         # init player spawn
         player = Player(self, (200, 100))
         self.entities["players"].add(player)
-        
+    
         # init wall cd
         self.wallCd = WALL_RATE / 2
-
-        self.fps_clock = pygame.time.Clock()
-        
-        self.run()
     
-        
     def run(self):
         while True:
             self.surface.fill(LIGHTGREY)
@@ -55,7 +58,9 @@ class Game:
                 for wall in collision:
                     collision[wall][0].alive = False
                     wall.hit = True
-                    
+            
+            self.hud.render()
+            
             pygame.display.update()
             self.fps_clock.tick(FPS)
 

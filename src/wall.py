@@ -17,7 +17,6 @@ class Wall(pygame.sprite.Sprite):
         self.image.fill(BLACK)
         self.rect = self.image.get_rect()
 
-        
         # kinematics
         self.dx = -WALL_SPEED
         self.dy = 0

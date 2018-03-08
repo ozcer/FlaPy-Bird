@@ -34,7 +34,9 @@ class Player(pygame.sprite.Sprite):
             # up
             if keys[K_w] and self.dy > -MAX_PLAYER_UP_SPEED:
                 self.dy -= 1
-                
+                self.image = self.sprites["jump"]
+            
+            # horizontal
             if keys[K_d]:
                 self.dx = 3
             elif keys[K_a]:
@@ -44,8 +46,9 @@ class Player(pygame.sprite.Sprite):
         
     def update(self):
         self.handle_input()
-
-        self.image = self.sprites["jump"] if self.dy < 0 else self.sprites["fall"]
+        
+        if self.dy > 0:
+            self.image = self.sprites["fall"]
         
         # gravity
         self.dy += GRAV if self.dy < TERM_VEL else 0
