@@ -13,9 +13,13 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
+OLIVE = (130, 119, 23)
+D_OLIVE = (82, 76, 0)
+L_OLIVE = (180, 166, 71)
+
 # physics
-GRAV = .5
-TERM_VEL = 6
+GRAV = .4
+TERM_VEL = 8
 
 # player
 MAX_PLAYER_UP_SPEED = 4

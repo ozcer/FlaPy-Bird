@@ -4,8 +4,8 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
-from src.player import Player
-from src.wall import Wall
+from src.game_object.player import Player
+from src.game_object.wall import Wall
 from src.HUD import HUD
 
 class Game:
@@ -16,8 +16,9 @@ class Game:
         pygame.display.set_caption(CAPTION)
         pygame.init()
     
-        self.sprite_groups = ["players", "walls"]
-        self.entities = {sp: pygame.sprite.Group() for sp in self.sprite_groups}
+        #self.sprite_groups = ["players", "walls"]
+        self.entities = {}
+
 
         self.fps_clock = pygame.time.Clock()
         self.hud = HUD(self)
@@ -28,7 +29,8 @@ class Game:
     def set_up(self):
         # init player spawn
         player = Player(self, (200, 100))
-        self.entities["players"].add(player)
+        self.make_entity(player)
+        #self.entities["players"].add(player)
     
         # init wall cd
         self.wallCd = WALL_RATE / 2
@@ -52,18 +54,24 @@ class Game:
                 self.make_walls()
             self.wallCd -= 1
             
-            # collision
-            collision = pygame.sprite.groupcollide(self.entities["walls"], self.entities["players"], False, False)
-            if collision:
-                for wall in collision:
-                    collision[wall][0].alive = False
-                    wall.hit = True
+            # # collision
+            # collision = pygame.sprite.groupcollide(self.entities["walls"], self.entities["players"], False, False)
+            # if collision:
+            #     for wall in collision:
+            #         collision[wall][0].alive = False
+            #         wall.hit = True
             
             self.hud.render()
             
             pygame.display.update()
             self.fps_clock.tick(FPS)
-
+    
+    def make_entity(self, object):
+        class_name = object.__class__.__name__
+        if class_name not in self.entities:
+            self.entities[class_name] = pygame.sprite.Group()
+        self.entities[class_name].add(object)
+    
     def make_walls(self):
         gap_height = random.randint(GAP_SIZE/2, DISPLAY_HEIGHT-GAP_SIZE/2)
         gap_top = gap_height - GAP_SIZE / 2
@@ -72,12 +80,12 @@ class Game:
         # top wall
         top_height = gap_top
         top_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
-        self.entities["walls"].add(top_wall)
+        self.make_entity(top_wall)
     
         # bottom wall
         bottom_height = DISPLAY_HEIGHT - gap_bottom
         bottom_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
-        self.entities["walls"].add(bottom_wall)
+        self.make_entity(bottom_wall)
         
         
 if __name__ == "__main__":
