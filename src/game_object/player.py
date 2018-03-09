@@ -38,11 +38,12 @@ class Player(pygame.sprite.Sprite):
             
             # horizontal
             if keys[K_d]:
-                self.dx = 3
+                self.game.pan_speed += 3
             elif keys[K_a]:
-                self.dx = -3
+                self.game.pan_speed = -3
             else:
                 self.dx = 0
+
         
     def update(self):
         self.handle_input()

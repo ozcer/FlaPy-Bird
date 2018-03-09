@@ -19,10 +19,14 @@ L_OLIVE = (180, 166, 71)
 
 # physics
 GRAV = .4
-TERM_VEL = 8
+
+# game
+PAN_SPEED = 2
+
 
 # player
 MAX_PLAYER_UP_SPEED = 4
+TERM_VEL = 8
 
 # wall
 WALL_WIDTH = 30

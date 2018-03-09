@@ -15,10 +15,10 @@ class Game:
         self.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
         pygame.display.set_caption(CAPTION)
         pygame.init()
-    
-        #self.sprite_groups = ["players", "walls"]
+        
+        self.pan_speed = PAN_SPEED
+        
         self.entities = {}
-
 
         self.fps_clock = pygame.time.Clock()
         self.hud = HUD(self)
@@ -29,7 +29,7 @@ class Game:
     def set_up(self):
         # init player spawn
         player = Player(self, (200, 100))
-        self.make_entity(player)
+        self.add_entity(player)
         #self.entities["players"].add(player)
     
         # init wall cd
@@ -38,6 +38,8 @@ class Game:
     def run(self):
         while True:
             self.surface.fill(LIGHTGREY)
+
+            self.pan_speed = PAN_SPEED
             
             for group in self.entities:
                 self.entities[group].update()
@@ -47,7 +49,7 @@ class Game:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                
+            
             # wall creation
             if self.wallCd <= 0:
                 self.wallCd = WALL_RATE
@@ -66,7 +68,7 @@ class Game:
             pygame.display.update()
             self.fps_clock.tick(FPS)
     
-    def make_entity(self, object):
+    def add_entity(self, object):
         class_name = object.__class__.__name__
         if class_name not in self.entities:
             self.entities[class_name] = pygame.sprite.Group()
@@ -80,12 +82,12 @@ class Game:
         # top wall
         top_height = gap_top
         top_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
-        self.make_entity(top_wall)
+        self.add_entity(top_wall)
     
         # bottom wall
         bottom_height = DISPLAY_HEIGHT - gap_bottom
         bottom_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
-        self.make_entity(bottom_wall)
+        self.add_entity(bottom_wall)
         
         
 if __name__ == "__main__":

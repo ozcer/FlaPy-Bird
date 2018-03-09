@@ -18,13 +18,15 @@ class Wall(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # kinematics
-        self.dx = -WALL_SPEED
+        self.dx = 0
         self.dy = 0
         
         # collision
         self.hit = False
         
     def update(self):
+        self.dx = -self.game.pan_speed
+        
         if self.hit:
             self.image.fill(RED)
         
