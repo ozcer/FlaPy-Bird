@@ -4,6 +4,7 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
+from src.floor import Floor
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 from src.HUD import HUD
@@ -33,18 +34,26 @@ class Game:
         #self.entities["players"].add(player)
     
         # init wall cd
-        self.wallCd = WALL_RATE / 2
-    
+        self.wallCd = 0 #WALL_RATE
+        
+        # floor
+        floor = Floor(self)
+        self.add_entity(floor)
+        
     def run(self):
         while True:
             self.surface.fill(LIGHTGREY)
 
             self.pan_speed = PAN_SPEED
             
-            for group in self.entities:
-                self.entities[group].update()
-                self.entities[group].draw(self.surface)
+            for cls in sorted(self.entities,
+                              key=lambda cls: self.entities[cls].sprites()[0].depth,
+                              reverse=True):
+                print(cls, self.entities[cls].sprites()[0].depth)
+                self.entities[cls].update()
+                self.entities[cls].draw(self.surface)
                 
+            
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -55,7 +64,7 @@ class Game:
                 self.wallCd = WALL_RATE
                 self.make_walls()
             self.wallCd -= 1
-            
+
             # # collision
             # collision = pygame.sprite.groupcollide(self.entities["walls"], self.entities["players"], False, False)
             # if collision:
@@ -64,7 +73,7 @@ class Game:
             #         wall.hit = True
             
             self.hud.render()
-            
+
             pygame.display.update()
             self.fps_clock.tick(FPS)
     

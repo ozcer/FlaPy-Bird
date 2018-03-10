@@ -14,7 +14,8 @@ class Player(pygame.sprite.Sprite):
         self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
                         "fall": pygame.image.load("sprites/fall.png")}
         self.image = self.sprites["fall"]
-
+        self.depth = -5
+        
         self.x, self.y = pos
         
         self.rect = self.image.get_rect()
