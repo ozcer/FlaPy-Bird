@@ -4,9 +4,9 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
+from src.panning_object import ScenicObject
 
-
-class Wall(pygame.sprite.Sprite):
+class Wall(ScenicObject):
     def __init__(self, game, pos, dim):
         pygame.sprite.Sprite.__init__(self)
         self.game = game
@@ -25,7 +25,7 @@ class Wall(pygame.sprite.Sprite):
         self.hit = False
         
     def update(self):
-        self.dx = -self.game.pan_speed
+        self.pan()
         
         if self.hit:
             self.image.fill(RED)

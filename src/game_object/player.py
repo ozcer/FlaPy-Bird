@@ -32,17 +32,17 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         if self.alive:
             # up
-            if keys[K_w] and self.dy > -MAX_PLAYER_UP_SPEED:
-                self.dy -= 1
+            if keys[K_w] and self.dy > -MAX_UP_SPEED:
+                self.dy -= UP_ACCEL
                 self.image = self.sprites["jump"]
             
             # horizontal
-            if keys[K_d]:
-                self.game.pan_speed += 3
-            elif keys[K_a]:
-                self.game.pan_speed = -3
-            else:
-                self.dx = 0
+            # if keys[K_d]:
+            #     self.game.pan_speed += 3
+            # elif keys[K_a]:
+            #     self.game.pan_speed = -3
+            # else:
+            #     self.dx = 0
 
         
     def update(self):
@@ -52,7 +52,7 @@ class Player(pygame.sprite.Sprite):
             self.image = self.sprites["fall"]
         
         # gravity
-        self.dy += GRAV if self.dy < TERM_VEL else 0
+        self.dy += GRAV if self.dy < MAX_DOWN_SPEED else 0
         
         # off screen death
         if not (0 < self.x < DISPLAY_WIDTH and 0 < self.y < DISPLAY_HEIGHT):

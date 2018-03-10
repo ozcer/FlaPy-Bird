@@ -11,7 +11,7 @@ class HUD():
         
         self.fonts = {"fps": pygame.font.SysFont("monospace", 20)}
         
-        self.dev_mode = False
+        self.dev_mode = True
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
