@@ -5,6 +5,7 @@ from src.const import *
 
 
 class Player(pygame.sprite.Sprite):
+    depth = -5
     def __init__(self, game, pos,):
         pygame.sprite.Sprite.__init__(self)
         self.game = game
@@ -14,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
                         "fall": pygame.image.load("sprites/fall.png")}
         self.image = self.sprites["fall"]
-        self.depth = -5
+        self.depth = Player.depth
         
         self.x, self.y = pos
         

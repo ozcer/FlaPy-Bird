@@ -25,5 +25,5 @@ class HUD():
         if self.dev_mode:
             fps_display = self.fonts["fps"].render(f"{round(self.game.fps_clock.get_fps())}",
                                                    True,
-                                                   BLACK)
+                                                   GREEN)
             self.game.surface.blit(fps_display, (DISPLAY_WIDTH-fps_display.get_width(),0))

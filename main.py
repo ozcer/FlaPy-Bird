@@ -5,6 +5,7 @@ from pygame.locals import *
 
 from src.const import *
 from src.floor import Floor
+from src.backdrop import Backdrop
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 from src.HUD import HUD
@@ -31,52 +32,49 @@ class Game:
         # init player spawn
         player = Player(self, (200, 100))
         self.add_entity(player)
-        #self.entities["players"].add(player)
     
         # init wall cd
         self.wallCd = 0 #WALL_RATE
         
         # floor
-        floor = Floor(self)
+        floor = Floor(self, left=0)
         self.add_entity(floor)
+
+        # backdrop
+        backdrop = Backdrop(self, left=0)
+        self.add_entity(backdrop)
         
     def run(self):
         while True:
-            self.surface.fill(LIGHTGREY)
+            self.surface.fill(L_GREY)
 
             self.pan_speed = PAN_SPEED
             
+            # draw and up date based on depth
             for cls in sorted(self.entities,
-                              key=lambda cls: self.entities[cls].sprites()[0].depth,
+                              key=lambda cls: eval(cls).depth,
                               reverse=True):
-                print(cls, self.entities[cls].sprites()[0].depth)
                 self.entities[cls].update()
                 self.entities[cls].draw(self.surface)
                 
+            # wall creation
+            if self.wallCd <= 0:
+                self.wallCd = WALL_RATE
+                self.make_walls()
+            self.wallCd -= 1
+            
+            # hud
+            self.hud.render()
+            
+            # fps and update display
+            pygame.display.update()
+            self.fps_clock.tick(FPS)
             
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
             
-            # wall creation
-            if self.wallCd <= 0:
-                self.wallCd = WALL_RATE
-                self.make_walls()
-            self.wallCd -= 1
-
-            # # collision
-            # collision = pygame.sprite.groupcollide(self.entities["walls"], self.entities["players"], False, False)
-            # if collision:
-            #     for wall in collision:
-            #         collision[wall][0].alive = False
-            #         wall.hit = True
-            
-            self.hud.render()
-
-            pygame.display.update()
-            self.fps_clock.tick(FPS)
-    
     def add_entity(self, object):
         class_name = object.__class__.__name__
         if class_name not in self.entities:
@@ -97,6 +95,8 @@ class Game:
         bottom_height = DISPLAY_HEIGHT - gap_bottom
         bottom_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
         self.add_entity(bottom_wall)
+
+        
         
         
 if __name__ == "__main__":
