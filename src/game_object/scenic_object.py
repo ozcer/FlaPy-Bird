@@ -4,20 +4,26 @@ from src.const import *
 
 class ScenicObject(pygame.sprite.Sprite):
     
+    def __init__(self):
+        super().__init__()
+    
+    
     def decayable(self):
         """
         check if is too far out from main surface
         :return: bool
         """
         # active zone = main surface x 2
-        active_zone = self.game.surface.get_rect().inflate(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2)
+        active_zone = self.game.surface.get_rect().inflate(self.rect.width*2, DISPLAY_HEIGHT/2)
         return not active_zone.colliderect(self.rect)
     
     
-    def pan(self):
+    def update(self):
+        super().update()
+        
         self.x += -self.game.pan_speed
         
         if self.decayable():
-            print(f"{self} decaying")
+            #print(f"{self} decaying")
             self.kill()
     

@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
+from src.game_object.timeline import Timeline
 
 
 class HUD():
@@ -12,6 +13,10 @@ class HUD():
         self.fonts = {"fps": pygame.font.SysFont("monospace", 20)}
         
         self.dev_mode = True
+
+        # floor
+        floor = Timeline(self.game, left=0)
+        self.game.add_entity(floor)
 
     def handle_input(self):
         keys = pygame.key.get_pressed()

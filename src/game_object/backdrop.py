@@ -1,8 +1,8 @@
 import pygame
 
 from src.const import *
-from src.scenic_object import ScenicObject
-from src.kinematic import Kinematic
+from src.game_object.scenic_object import ScenicObject
+from src.game_object.kinematic import Kinematic
 
 
 class Backdrop(ScenicObject, Kinematic):
@@ -32,18 +32,20 @@ class Backdrop(ScenicObject, Kinematic):
         self.dy = 0
         
         self.extended = False
+        
+        print(f"{self} created at {self.rect.left}")
     
     def extend(self):
-        print("extending")
         self.extended = True
         color = D_GREY if self.color == L_GREY else L_GREY
         
-        extension = Backdrop(self.game, left=self.rect.right - 10, color=color)
+        extension = Backdrop(self.game, left=self.rect.right, color=color)
+        print(f"{extension} extended at {extension.rect.left}")
         self.game.add_entity(extension)
     
     def update(self):
+        super().update()
+        
         if self.rect.left <= 0 and not self.extended:
             self.extend()
-        self.pan()
-        self.apply_kinematic()
 

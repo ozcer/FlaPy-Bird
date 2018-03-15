@@ -4,7 +4,7 @@ from pygame.locals import *
 from src.const import *
 
 
-class Player(pygame.sprite.Sprite):
+class Player(pygame.sprite.Sprite, ):
     depth = -5
     def __init__(self, game, pos,):
         pygame.sprite.Sprite.__init__(self)

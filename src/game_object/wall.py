@@ -1,15 +1,14 @@
 import pygame
-from pygame.locals import *
 
 from src.const import *
-from src.scenic_object import ScenicObject
-from src.kinematic import Kinematic
+from src.game_object.scenic_object import ScenicObject
+from src.game_object.kinematic import Kinematic
 
 
 class Wall(ScenicObject, Kinematic):
     depth = 1
     def __init__(self, game, pos, dim):
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
         self.game = game
 
         self.x, self.y = pos
@@ -31,10 +30,11 @@ class Wall(ScenicObject, Kinematic):
         self.hit = False
         
     def update(self):
-        self.pan()
+        super().update()
+
+        self.show_attribute()
 
         if self.hit:
             self.image.fill(RED)
         
-        self.apply_kinematic()
         

@@ -4,8 +4,8 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
-from src.floor import Floor
-from src.backdrop import Backdrop
+from src.game_object.backdrop import Backdrop
+from src.game_object.timeline import Timeline
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 from src.HUD import HUD
@@ -36,9 +36,7 @@ class Game:
         # init wall cd
         self.wallCd = 0 #WALL_RATE
         
-        # floor
-        floor = Floor(self, left=0)
-        self.add_entity(floor)
+        
 
         # backdrop
         backdrop = Backdrop(self, left=0)
@@ -46,15 +44,17 @@ class Game:
         
     def run(self):
         while True:
-            self.surface.fill(L_GREY)
+            #self.surface.fill(L_GREY)
 
             self.pan_speed = PAN_SPEED
             
-            # draw and up date based on depth
+            for cls in self.entities:
+                self.entities[cls].update()
+            
+            # draw abased on depth
             for cls in sorted(self.entities,
                               key=lambda cls: eval(cls).depth,
                               reverse=True):
-                self.entities[cls].update()
                 self.entities[cls].draw(self.surface)
                 
             # wall creation
@@ -86,10 +86,10 @@ class Game:
         gap_top = gap_height - GAP_SIZE / 2
         gap_bottom = gap_height + GAP_SIZE / 2
         
-        # top wall
-        top_height = gap_top
-        top_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
-        self.add_entity(top_wall)
+        # # top wall
+        # top_height = gap_top
+        # top_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
+        # self.add_entity(top_wall)
     
         # bottom wall
         bottom_height = DISPLAY_HEIGHT - gap_bottom
