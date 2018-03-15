@@ -19,11 +19,11 @@ class HUD():
         self.game.add_entity(floor)
 
     def handle_input(self):
-        keys = pygame.key.get_pressed()
-        
         # developer mode
-        if (keys[K_LCTRL] or keys[K_RCTRL]) and keys[K_m]:
-            self.dev_mode = not self.dev_mode
+        for event in pygame.event.get():
+            if event.type == KEYDOWN and event.key == K_m:
+                self.dev_mode = not self.dev_mode
+                print("swapped")
     
     def render(self):
         self.handle_input()

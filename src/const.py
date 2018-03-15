@@ -1,7 +1,7 @@
 # display
 FPS = 60
 CAPTION = "FlaPy Bird"
-DISPLAY_WIDTH = 960
+DISPLAY_WIDTH = 1280
 DISPLAY_HEIGHT = 540
 
 # colors

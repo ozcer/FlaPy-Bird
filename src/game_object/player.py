@@ -2,12 +2,12 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
+from src.game_object.kinematic import Kinematic
 
-
-class Player(pygame.sprite.Sprite, ):
+class Player(Kinematic):
     depth = -5
     def __init__(self, game, pos,):
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
         self.game = game
         
         
@@ -46,7 +46,10 @@ class Player(pygame.sprite.Sprite, ):
             # else:
             #     self.dx = 0
 
-        
+    def draw(self):
+        super().draw()
+    
+    
     def update(self):
         self.handle_input()
         

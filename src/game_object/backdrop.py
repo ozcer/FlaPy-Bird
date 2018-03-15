@@ -9,7 +9,7 @@ class Backdrop(ScenicObject, Kinematic):
     depth = 10
     
     def __init__(self, game, left=None, dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT), color=L_GREY):
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
         self.game = game
         
         self.image = pygame.Surface(dim)
@@ -42,6 +42,9 @@ class Backdrop(ScenicObject, Kinematic):
         extension = Backdrop(self.game, left=self.rect.right, color=color)
         print(f"{extension} extended at {extension.rect.left}")
         self.game.add_entity(extension)
+    
+    def draw(self):
+        super().draw()
     
     def update(self):
         super().update()

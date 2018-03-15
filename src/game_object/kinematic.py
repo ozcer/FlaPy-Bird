@@ -6,6 +6,9 @@ class Kinematic(GameObject):
     def __init__(self):
         super().__init__()
     
+    def draw(self):
+        super().draw()
+    
     def update(self):
         super().update()
         

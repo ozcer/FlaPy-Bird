@@ -9,7 +9,7 @@ class Timeline(ScenicObject, Kinematic):
     depth = 0
     
     def __init__(self, game, left=None, dim=(TL_WIDTH, TL_HEIGHT), color=OLIVE):
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
         self.game = game
         
         self.image = pygame.Surface(dim)
@@ -42,6 +42,10 @@ class Timeline(ScenicObject, Kinematic):
         
         extension = Timeline(self.game, left=self.rect.right, color=color)
         self.game.add_entity(extension)
+    
+    def draw(self):
+        super().draw()
+        
     
     def update(self):
         super().update()

@@ -44,7 +44,7 @@ class Game:
         
     def run(self):
         while True:
-            #self.surface.fill(L_GREY)
+            self.surface.fill(L_GREY)
 
             self.pan_speed = PAN_SPEED
             
@@ -55,7 +55,8 @@ class Game:
             for cls in sorted(self.entities,
                               key=lambda cls: eval(cls).depth,
                               reverse=True):
-                self.entities[cls].draw(self.surface)
+                for sprite in self.entities[cls].sprites():
+                    sprite.draw()
                 
             # wall creation
             if self.wallCd <= 0:
@@ -69,6 +70,7 @@ class Game:
             # fps and update display
             pygame.display.update()
             self.fps_clock.tick(FPS)
+        
             
             for event in pygame.event.get():
                 if event.type == QUIT:

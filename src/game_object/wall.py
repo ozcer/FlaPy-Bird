@@ -28,11 +28,12 @@ class Wall(ScenicObject, Kinematic):
         
         # collision
         self.hit = False
-        
+    
+    def draw(self):
+        super().draw()
+    
     def update(self):
         super().update()
-
-        self.show_attribute()
 
         if self.hit:
             self.image.fill(RED)

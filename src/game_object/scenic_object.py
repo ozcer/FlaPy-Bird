@@ -1,8 +1,10 @@
 import pygame
 
 from src.const import *
+from src.game_object.game_object import GameObject
 
-class ScenicObject(pygame.sprite.Sprite):
+
+class ScenicObject(GameObject):
     
     def __init__(self):
         super().__init__()
@@ -17,6 +19,9 @@ class ScenicObject(pygame.sprite.Sprite):
         active_zone = self.game.surface.get_rect().inflate(self.rect.width*2, DISPLAY_HEIGHT/2)
         return not active_zone.colliderect(self.rect)
     
+    
+    def draw(self):
+        super().draw()
     
     def update(self):
         super().update()
