@@ -1,8 +1,8 @@
 import pygame
 
 from src.const import *
-from src.game_object.scenic_object import ScenicObject
-from src.game_object.kinematic import Kinematic
+from src.game_object.scenic import ScenicObject
+from src.game_object.dynamic import Kinematic
 
 
 class Timeline(ScenicObject, Kinematic):

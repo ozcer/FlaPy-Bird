@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
-from src.game_object.kinematic import Kinematic
+from src.game_object.dynamic import Kinematic
 
 class Player(Kinematic):
     depth = -5
