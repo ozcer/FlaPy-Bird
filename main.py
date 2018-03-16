@@ -65,7 +65,7 @@ class Game:
             self.wallCd -= 1
             
             # hud
-            self.hud.render()
+            self.hud.draw()
             
             # fps and update display
             pygame.display.update()
@@ -76,6 +76,8 @@ class Game:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == KEYDOWN and event.key == K_TAB:
+                    self.hud.mode_toggle()
             
     def add_entity(self, object):
         class_name = object.__class__.__name__
