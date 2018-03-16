@@ -20,11 +20,6 @@ class HUD():
 
     def mode_toggle(self):
         self.dev_mode = not self.dev_mode
-        # developer mode
-        # for event in pygame.event.get():
-        #     if event.type == KEYDOWN and event.key == K_m:
-        #         self.dev_mode = not self.dev_mode
-        #         print("swapped")
     
     def draw(self):
         if self.dev_mode:
