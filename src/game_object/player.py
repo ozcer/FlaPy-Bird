@@ -5,26 +5,24 @@ from src.const import *
 from src.game_object.dynamic import Dynamic
 
 class Player(Dynamic):
-    depth = -5
-    def __init__(self, game, pos,):
+    def __init__(self, game, pos, depth=-5):
         super().__init__()
         self.game = game
         
-        
-        # sprite
+        # sprites
         self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
                         "fall": pygame.image.load("sprites/fall.png")}
         self.image = self.sprites["fall"]
-        self.depth = Player.depth
+        self.depth = depth
         
-        self.x, self.y = pos
-
+        # hitbox
         self.rect = self.image.get_rect()
+        self.x, self.y = pos
         self.rect.center = self.x, self.y
         self.width = self.rect.width
         self.height = self.rect.height
         
-        # kinematics
+        # dynamics
         self.dx = 0
         self.dy = 0
         
@@ -48,7 +46,6 @@ class Player(Dynamic):
 
     def draw(self):
         super().draw()
-    
     
     def update(self):
         self.handle_input()
