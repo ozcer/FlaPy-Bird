@@ -1,7 +1,7 @@
 import pygame
 from src.game_object.game_object import GameObject
 
-class Kinematic(GameObject):
+class Dynamic(GameObject):
     
     def __init__(self):
         super().__init__()

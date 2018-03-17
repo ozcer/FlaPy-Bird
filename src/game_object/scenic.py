@@ -4,7 +4,7 @@ from src.const import *
 from src.game_object.game_object import GameObject
 
 
-class ScenicObject(GameObject):
+class Scenic(GameObject):
     
     def __init__(self):
         super().__init__()

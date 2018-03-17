@@ -2,9 +2,9 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
-from src.game_object.dynamic import Kinematic
+from src.game_object.dynamic import Dynamic
 
-class Player(Kinematic):
+class Player(Dynamic):
     depth = -5
     def __init__(self, game, pos,):
         super().__init__()

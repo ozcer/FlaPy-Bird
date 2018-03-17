@@ -1,11 +1,11 @@
 import pygame
 
 from src.const import *
-from src.game_object.scenic import ScenicObject
-from src.game_object.dynamic import Kinematic
+from src.game_object.scenic import Scenic
+from src.game_object.dynamic import Dynamic
 
 
-class Wall(ScenicObject, Kinematic):
+class Wall(Scenic, Dynamic):
     depth = 1
     def __init__(self, game, pos, dim):
         super().__init__()

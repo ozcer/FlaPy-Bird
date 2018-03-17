@@ -1,11 +1,11 @@
 import pygame
 
 from src.const import *
-from src.game_object.scenic import ScenicObject
-from src.game_object.dynamic import Kinematic
+from src.game_object.scenic import Scenic
+from src.game_object.dynamic import Dynamic
 
 
-class Timeline(ScenicObject, Kinematic):
+class Timeline(Scenic, Dynamic):
     depth = 0
     
     def __init__(self, game, left=None, dim=(TL_WIDTH, TL_HEIGHT), color=OLIVE):
