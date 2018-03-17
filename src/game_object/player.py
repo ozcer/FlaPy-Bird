@@ -18,7 +18,7 @@ class Player(Dynamic):
         self.depth = Player.depth
         
         self.x, self.y = pos
-        
+
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
         self.width = self.rect.width

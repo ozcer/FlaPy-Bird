@@ -12,7 +12,7 @@ class HUD():
         
         self.fonts = {"fps": pygame.font.SysFont("monospace", 20)}
         
-        self.dev_mode = True
+        self.dev_mode = False
 
         # floor
         floor = Timeline(self.game, left=0)
