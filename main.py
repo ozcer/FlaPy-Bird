@@ -1,4 +1,5 @@
 import sys
+import os
 import random
 import pygame
 from pygame.locals import *
@@ -13,10 +14,11 @@ from src.HUD import HUD
 class Game:
     
     def __init__(self):
-        # surfaces
-        self.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
-        pygame.display.set_caption(CAPTION)
+        # pygame window setups
+        os.environ['SDL_VIDEO_CENTERED'] = '1'  # center window
         pygame.init()
+        pygame.display.set_caption(CAPTION)
+        self.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
         
         self.pan_speed = PAN_SPEED
         

@@ -1,8 +1,9 @@
 # display
 FPS = 60
-CAPTION = "FlaPy Bird"
+CAPTION = "Project Ooze"
 DISPLAY_WIDTH = 1280
 DISPLAY_HEIGHT = 540
+START_WINDOW_POS = (100,100)
 
 # colors
 WHITE = (255, 255, 255)
