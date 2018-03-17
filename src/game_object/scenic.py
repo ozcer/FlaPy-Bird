@@ -1,10 +1,10 @@
 import pygame
 
 from src.const import *
-from src.game_object.game_object import GameObject
+from src.game_object.dynamic import Dynamic
 
 
-class Scenic(GameObject):
+class Scenic(Dynamic):
     
     def __init__(self):
         super().__init__()

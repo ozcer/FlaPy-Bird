@@ -5,7 +5,7 @@ from src.game_object.scenic import Scenic
 from src.game_object.dynamic import Dynamic
 
 
-class Timeline(Scenic, Dynamic):
+class Timeline(Scenic):
     depth = 0
     
     def __init__(self, game, left=None, dim=(TL_WIDTH, TL_HEIGHT), color=OLIVE):

@@ -5,7 +5,7 @@ from src.game_object.scenic import Scenic
 from src.game_object.dynamic import Dynamic
 
 
-class Wall(Scenic, Dynamic):
+class Wall(Scenic):
     depth = 1
     def __init__(self, game, pos, dim):
         super().__init__()

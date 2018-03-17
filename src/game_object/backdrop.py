@@ -5,7 +5,7 @@ from src.game_object.scenic import Scenic
 from src.game_object.dynamic import Dynamic
 
 
-class Backdrop(Scenic, Dynamic):
+class Backdrop(Scenic):
     depth = 10
     
     def __init__(self, game, left=None, dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT), color=L_GREY):
