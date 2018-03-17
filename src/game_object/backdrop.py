@@ -1,11 +1,11 @@
 import pygame
 
 from src.const import *
-from src.game_object.scenic import ScenicObject
-from src.game_object.dynamic import Kinematic
+from src.game_object.scenic import Scenic
+from src.game_object.dynamic import Dynamic
 
 
-class Backdrop(ScenicObject, Kinematic):
+class Backdrop(Scenic, Dynamic):
     depth = 10
     
     def __init__(self, game, left=None, dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT), color=L_GREY):
