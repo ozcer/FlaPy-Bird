@@ -18,15 +18,10 @@ class HUD():
         floor = Timeline(self.game, left=0)
         self.game.add_entity(floor)
 
-    def handle_input(self):
-        # developer mode
-        for event in pygame.event.get():
-            if event.type == KEYDOWN and event.key == K_m:
-                self.dev_mode = not self.dev_mode
-                print("swapped")
+    def mode_toggle(self):
+        self.dev_mode = not self.dev_mode
     
-    def render(self):
-        self.handle_input()
+    def draw(self):
         if self.dev_mode:
             fps_display = self.fonts["fps"].render(f"{round(self.game.fps_clock.get_fps())}",
                                                    True,
