@@ -4,7 +4,7 @@ from pygame.locals import *
 from src.const import *
 from src.game_object.dynamic import *
 
-class enemies(dynamic):
+class enemies(Dynamic):
     depth = -4
     def __init__(self, game):
         super().__init__()
@@ -17,7 +17,7 @@ class enemies(dynamic):
         self.image = self.sprites["ooze"]
 
         self.x = DISPLAY_WIDTH + 50
-        self.y = 0
+        self.y = DISPLAY_HEIGHT/2
 
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
