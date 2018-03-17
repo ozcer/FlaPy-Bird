@@ -9,6 +9,7 @@ from src.game_object.timeline import Timeline
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 from src.HUD import HUD
+from src.game_object.enemies import enemies
 
 class Game:
     
@@ -35,8 +36,9 @@ class Game:
     
         # init wall cd
         self.wallCd = 0 #WALL_RATE
-        
-        
+
+        #initial monster cd
+        self.monsterCd = 5
 
         # backdrop
         backdrop = Backdrop(self, left=0)
@@ -63,6 +65,14 @@ class Game:
                 self.wallCd = WALL_RATE
                 self.make_walls()
             self.wallCd -= 1
+
+            #monster creation
+            new_enemy = enemies(self)
+            if self.monsterCd <= 0:
+                self.monsterCd = MONSTER_RATE
+                self.add_entity(new_enemy)
+                print("monster added")
+            self.monsterCd -= 1
             
             # hud
             self.hud.draw()
