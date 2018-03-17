@@ -6,8 +6,11 @@ from src.game_object.dynamic import Dynamic
 
 
 class Wall(Scenic):
-    depth = 1
-    def __init__(self, game, pos, dim):
+    def __init__(self,
+                 game,
+                 pos,
+                 dim,
+                 depth=1):
         super().__init__()
         self.game = game
 
@@ -20,7 +23,7 @@ class Wall(Scenic):
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
         
-        self.depth = Wall.depth
+        self.depth = depth
 
         # kinematics
         self.dx = 0
@@ -37,5 +40,4 @@ class Wall(Scenic):
 
         if self.hit:
             self.image.fill(RED)
-        
         

@@ -6,16 +6,19 @@ from src.game_object.dynamic import Dynamic
 
 
 class Backdrop(Scenic):
-    depth = 10
     
-    def __init__(self, game, left=None, dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT), color=L_GREY):
+    def __init__(self, game,
+                 left=None,
+                 dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT),
+                 color=L_GREY,
+                 depth=10):
         super().__init__()
         self.game = game
         
         self.image = pygame.Surface(dim)
         self.color = color
         self.image.fill(self.color)
-        self.depth = Backdrop.depth
+        self.depth = depth
         
         if left is not None:
             self.x = left + dim[0] / 2
@@ -27,20 +30,18 @@ class Backdrop(Scenic):
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
         
-        # kinematics
+        # dynamics
         self.dx = 0
         self.dy = 0
         
         self.extended = False
-        
-        print(f"{self} created at {self.rect.left}")
+
     
     def extend(self):
         self.extended = True
         color = D_GREY if self.color == L_GREY else L_GREY
         
         extension = Backdrop(self.game, left=self.rect.right, color=color)
-        print(f"{extension} extended at {extension.rect.left}")
         self.game.add_entity(extension)
     
     def draw(self):

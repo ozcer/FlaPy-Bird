@@ -20,7 +20,7 @@ class Game:
         
         self.pan_speed = PAN_SPEED
         
-        self.entities = {}
+        self.entities = {GLOBAL_SPRITE_GROUP: pygame.sprite.Group()}
 
         self.fps_clock = pygame.time.Clock()
         self.hud = HUD(self)
@@ -48,15 +48,15 @@ class Game:
 
             self.pan_speed = PAN_SPEED
             
-            for cls in self.entities:
-                self.entities[cls].update()
+            # update all objects
+            for sprite in self.entities[GLOBAL_SPRITE_GROUP]:
+                sprite.update()
             
             # draw abased on depth
-            for cls in sorted(self.entities,
-                              key=lambda cls: eval(cls).depth,
-                              reverse=True):
-                for sprite in self.entities[cls].sprites():
-                    sprite.draw()
+            for sprite in sorted(self.entities[GLOBAL_SPRITE_GROUP],
+                                 key=lambda sprite: sprite.depth,
+                                 reverse=True):
+                sprite.draw()
                 
             # wall creation
             if self.wallCd <= 0:
@@ -80,10 +80,14 @@ class Game:
                     self.hud.mode_toggle()
             
     def add_entity(self, object):
+        # add to its own sprite group
         class_name = object.__class__.__name__
         if class_name not in self.entities:
             self.entities[class_name] = pygame.sprite.Group()
         self.entities[class_name].add(object)
+        
+        # also add to global sprite group
+        self.entities[GLOBAL_SPRITE_GROUP].add(object)
     
     def make_walls(self):
         gap_height = random.randint(GAP_SIZE/2, DISPLAY_HEIGHT-GAP_SIZE/2)
@@ -100,7 +104,6 @@ class Game:
         bottom_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, gap_bottom + bottom_height / 2), (WALL_WIDTH, bottom_height))
         self.add_entity(bottom_wall)
 
-        
         
         
 if __name__ == "__main__":

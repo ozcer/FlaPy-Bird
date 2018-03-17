@@ -23,6 +23,8 @@ GRAV = .4
 # game
 PAN_SPEED = 3
 
+# spritegroup
+GLOBAL_SPRITE_GROUP = "ALL"
 
 # player
 UP_ACCEL = 1

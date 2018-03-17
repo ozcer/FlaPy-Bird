@@ -6,17 +6,22 @@ from src.game_object.dynamic import Dynamic
 
 
 class Timeline(Scenic):
-    depth = 0
     
-    def __init__(self, game, left=None, dim=(TL_WIDTH, TL_HEIGHT), color=OLIVE):
+    def __init__(self, game,
+                 left=None,
+                 dim=(TL_WIDTH, TL_HEIGHT),
+                 color=OLIVE,
+                 depth=0):
         super().__init__()
         self.game = game
         
+        # graphics
         self.image = pygame.Surface(dim)
         self.color = color
         self.image.fill(self.color)
-        self.depth = Timeline.depth
+        self.depth = depth
         
+        # position and hitbox
         if left is not None:
             self.x = left+ dim[0]/2
             self.y = DISPLAY_HEIGHT - dim[1]/2
@@ -27,16 +32,13 @@ class Timeline(Scenic):
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
         
-        # kinematics
+        # dynamics
         self.dx = 0
         self.dy = 0
         
         self.extended = False
-
-        print(f"{self} created at {self.rect.left}")
         
     def extend(self):
-        print(f"{self} extended at {self.rect.left}")
         self.extended = True
         color = D_OLIVE if self.color == OLIVE else OLIVE
         
@@ -46,7 +48,6 @@ class Timeline(Scenic):
     def draw(self):
         super().draw()
         
-    
     def update(self):
         super().update()
         
