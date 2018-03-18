@@ -2,7 +2,6 @@ import pygame
 
 from src.const import *
 from src.game_object.scenic import Scenic
-from src.game_object.dynamic import Dynamic
 
 
 class Wall(Scenic):
