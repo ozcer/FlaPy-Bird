@@ -1,10 +1,10 @@
+import pygame
 from src.game_object.game_object import GameObject
 
-
 class Dynamic(GameObject):
-
-    def __init__(self):
-        super().__init__()
+    
+    def __init__(self, game, *, pos, depth, image):
+        super().__init__(game, pos=pos, depth=depth, image=image)
     
     def draw(self):
         super().draw()

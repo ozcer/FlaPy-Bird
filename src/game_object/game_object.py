@@ -5,8 +5,32 @@ from src.const import *
 
 class GameObject(pygame.sprite.Sprite):
     
-    def __init__(self):
+    def __init__(self,
+                 game, *,
+                 pos,
+                 depth,
+                 image,
+                 ):
+        """
+        General game object
+        :param game: Game
+        :param pos: (x,y)
+        :param depth: int
+        :param image: pygame.Surface
+        """
         super().__init__()
+        self.game=game
+        
+        # hit box and positioning
+        self.x, self.y = pos
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.center = self.x, self.y
+        
+        # draw depth, larger=more behind
+        self.depth = depth
+        
+        # font for debug attributes
         self.debug_font = pygame.font.SysFont("monospace", 17)
     
     def update(self):
@@ -31,6 +55,7 @@ class GameObject(pygame.sprite.Sprite):
                             )
         for index, display in enumerate(displays):
             self.game.surface.blit(display, (self.x, self.y + display.get_rect().h * index))
+
 
     def decayable(self):
         """
