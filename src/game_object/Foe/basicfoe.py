@@ -1,5 +1,8 @@
 import random
 
+import pygame
+
+from src.const import *
 from src.game_object.Foe.foe import *
 
 
