@@ -1,14 +1,15 @@
-import os
 import sys
-
+import os
+import random
+import pygame
 from pygame.locals import *
 
-from src.HUD import HUD
-from src.game_object.Foe.basicfoe import *
+from src.const import *
 from src.game_object.backdrop import Backdrop
 from src.game_object.player import Player
 from src.game_object.wall import Wall
-
+from src.HUD import HUD
+from src.game_object.Foe.basicfoe import *
 
 class Game:
     
@@ -72,7 +73,7 @@ class Game:
                 self.monsterCd = MONSTER_RATE
                 self.add_entity(new_enemy)
                 print("monster added")
-            self.monsterCd -= 5
+            self.monsterCd -= 1
             
             # hud
             self.hud.draw()

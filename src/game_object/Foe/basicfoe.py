@@ -1,7 +1,5 @@
-import random
-
 from src.game_object.Foe.foe import *
-
+import random
 
 class BasicFoe(Foe):
     def __init__(self, game):
