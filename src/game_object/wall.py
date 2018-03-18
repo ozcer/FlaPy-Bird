@@ -39,4 +39,4 @@ class Wall(Scenic):
 
         if self.hit:
             self.image.fill(RED)
-        
+

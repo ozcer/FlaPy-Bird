@@ -15,7 +15,7 @@ from src.game_object.wall import Wall
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, **options):
         # pygame window setups
         os.environ['SDL_VIDEO_CENTERED'] = '1'  # center window
         pygame.init()
@@ -30,6 +30,12 @@ class Game:
         self.hud = HUD(self)
 
         self.events = pygame.event.get()
+
+        #game state
+        self.game_state = [STARTING_SCREEN]
+        self.done = False
+        #Menu font
+        self.font = pygame.font.Font(None, 24)
 
         self.set_up()
         self.run()
@@ -50,7 +56,49 @@ class Game:
         self.add_entity(backdrop)
 
     def run(self):
-        while True:
+        while self.game_state:
+            if not self.game_state:
+                pygame.quit()
+                sys.exit()
+
+            next_state = self.game_state.pop()
+            print("Switching state")
+            function_name = next_state.replace(" ", "_")
+            print(self.game_state)
+            if hasattr(self, function_name):
+                function = getattr(self, function_name)
+                function()
+            else:
+                pygame.quit()
+                sys.exit()
+                print("Game over")
+
+    def title_screen(self):
+        print("start screen called")
+        self.done = False
+        while not self.done:
+            self.events = pygame.event.get()
+            for event in self.events:
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == KEYDOWN:
+                    if event.key == K_RETURN:
+                        self.game_state.append(GAME_SCREEN)
+                        self.done = True
+
+            self.surface.fill(OLIVE)
+            #Text
+            text = "Title Screen"
+            self.surface.blit(self.font.render(text, 1, BLACK), (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2))
+
+            pygame.display.update()
+            self.fps_clock.tick(20)
+
+    def game_screen(self):
+        print("game screen called")
+        self.done = False
+        while not self.done:
             self.surface.fill(L_GREY)
 
             self.pan_speed = PAN_SPEED
@@ -90,8 +138,15 @@ class Game:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == KEYDOWN and event.key == K_TAB:
-                    self.hud.mode_toggle()
+                if event.type == KEYDOWN:
+                    if event.key == K_TAB:
+                        self.hud.mode_toggle()
+                    elif event.key == K_ESCAPE:
+                        self.game_state.append(STARTING_SCREEN)
+                        Game.run(self)
+
+    def pause_menu(self):
+        pass
 
     def add_entity(self, object):
         # add to its own sprite group
