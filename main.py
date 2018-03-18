@@ -76,7 +76,6 @@ class Game:
             if self.monsterCd <= 0:
                 self.monsterCd = MONSTER_RATE
                 self.add_entity(new_enemy)
-                print("monster added")
             self.monsterCd -= 1
 
             # hud

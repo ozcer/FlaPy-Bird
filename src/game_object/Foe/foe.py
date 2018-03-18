@@ -32,7 +32,7 @@ class Foe(Dynamic):
         super().update()
 
         #health condition
-        if self.hp is 0 or self.decayable():
+        if self.hp is 0:
             self.alive = False
 
         if not self.alive:

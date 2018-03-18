@@ -10,7 +10,8 @@ class GameObject(pygame.sprite.Sprite):
         self.debug_font = pygame.font.SysFont("monospace", 17)
     
     def update(self):
-        pass
+        if self.decayable():
+            self.kill()
     
     def draw(self):
         self.game.surface.blit(self.image, self.rect)
