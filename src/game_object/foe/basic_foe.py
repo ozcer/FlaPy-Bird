@@ -26,7 +26,7 @@ class BasicFoe(Foe):
         super().__init__(game, pos, depth, self.image)
 
     def draw(self):
-        Foe.draw(self)
+        super().draw()
 
     def update(self):
-        Foe.update(self)
+        super().update()

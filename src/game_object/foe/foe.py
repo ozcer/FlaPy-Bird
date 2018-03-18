@@ -1,11 +1,14 @@
+import pygame
+
 from src.game_object.dynamic import Dynamic
+
 
 class Foe(Dynamic):
     def __init__(self,
                  game,
                  pos,
-                 depth,
-                 image):
+                 depth=-4,
+                 image=pygame.image.load("sprites/foesprites/foe1.png")):
         super().__init__()
 
         self.game = game
