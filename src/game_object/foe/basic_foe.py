@@ -9,6 +9,7 @@ from src.game_object.foe.foe import Foe
 class BasicFoe(Foe):
     sprites = {"ooze": pygame.image.load("sprites/foesprites/foe1.png"),
                    "tedders": pygame.image.load("sprites/foesprites/foe2.png")}
+
     def __init__(self,
                  game,
                  pos=(DISPLAY_WIDTH + 50, DISPLAY_HEIGHT / 2),

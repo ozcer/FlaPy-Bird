@@ -5,6 +5,7 @@ from src.game_object.dynamic import Dynamic
 
 class Foe(Dynamic):
     placeholder_img = pygame.image.load("sprites/foesprites/foe1.png")
+
     def __init__(self,
                  game,
                  pos,
