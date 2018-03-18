@@ -1,15 +1,17 @@
-import sys
 import os
 import random
+import sys
+
 import pygame
 from pygame.locals import *
 
+from src.HUD import HUD
 from src.const import *
 from src.game_object.backdrop import Backdrop
-from src.game_object.timeline import Timeline
+from src.game_object.foe.basic_foe import BasicFoe
 from src.game_object.player import Player
 from src.game_object.wall import Wall
-from src.HUD import HUD
+
 
 class Game:
 
@@ -95,6 +97,7 @@ class Game:
 
     def game_screen(self):
         print("game screen called")
+        print(self.game_state)
         self.done = False
         while not self.done:
             self.surface.fill(L_GREY)
@@ -140,11 +143,31 @@ class Game:
                     if event.key == K_TAB:
                         self.hud.mode_toggle()
                     elif event.key == K_ESCAPE:
-                        self.game_state.append(STARTING_SCREEN)
+                        self.game_state.append(PAUSE_SCREEN)
                         Game.run(self)
 
     def pause_menu(self):
-        pass
+        self.done = False
+        while not self.done:
+            self.events = pygame.event.get()
+            for event in self.events:
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == KEYDOWN:
+                    if event.key == K_TAB:
+                        self.hud.mode_toggle()
+                    elif event.key == K_ESCAPE:
+                        self.game_state.append(GAME_SCREEN)
+                        self.done = True
+
+            menu_surface = pygame.Surface((50, 50), pygame.SRCALPHA, 32)
+            menu_surface.fill(RED)
+            self.surface.blit(menu_surface, (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2))
+
+            pygame.display.update()
+            self.fps_clock.tick(20)
+
 
     def add_entity(self, object):
         # add to its own sprite group
