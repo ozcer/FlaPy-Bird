@@ -1,6 +1,6 @@
 ### FlaPy-Bird
 
-Welcome to FlaPy-Bird, a flappy bird clode implemented in Python using the pygame library. 
+Welcome to FlaPy-Bird, a flappy bird clone implemented in Python using the pygame library. 
 
 ## Prerequisites
 
