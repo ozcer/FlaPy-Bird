@@ -143,8 +143,9 @@ class Game:
                     if event.key == K_TAB:
                         self.hud.mode_toggle()
                     elif event.key == K_ESCAPE:
+                        self.done = True
+                        self.game_state.append(GAME_SCREEN)
                         self.game_state.append(PAUSE_SCREEN)
-                        Game.run(self)
 
     def pause_menu(self):
         self.done = False
@@ -158,7 +159,6 @@ class Game:
                     if event.key == K_TAB:
                         self.hud.mode_toggle()
                     elif event.key == K_ESCAPE:
-                        self.game_state.append(GAME_SCREEN)
                         self.done = True
 
             menu_surface = pygame.Surface((50, 50), pygame.SRCALPHA, 32)
