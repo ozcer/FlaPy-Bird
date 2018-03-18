@@ -9,21 +9,10 @@ from src.game_object.projectile.bullet import Bullet
 class Player(Dynamic):
     sprites = {"jump": pygame.image.load("sprites/jump.png"),
                "fall": pygame.image.load("sprites/fall.png")}
-
-    def __init__(self, game, pos, depth=-5):
-        super().__init__()
-        self.game = game
-        
-        # sprites
-        self.image = Player.sprites["fall"]
-        self.depth = depth
-        
-        # hitbox
-        self.rect = self.image.get_rect()
-        self.x, self.y = pos
-        self.rect.center = self.x, self.y
-        self.width = self.rect.width
-        self.height = self.rect.height
+    
+    def __init__(self, game, *, pos, depth=-5):
+        image = Player.sprites["fall"]
+        super().__init__(game, pos=pos, depth=depth, image=image)
         
         # dynamics
         self.dx = 0

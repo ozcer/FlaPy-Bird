@@ -12,25 +12,21 @@ class Timeline(Scenic):
                  dim=(TL_WIDTH, TL_HEIGHT),
                  color=OLIVE,
                  depth=0):
-        super().__init__()
-        self.game = game
         
-        # graphics
-        self.image = pygame.Surface(dim)
-        self.color = color
-        self.image.fill(self.color)
-        self.depth = depth
-        
-        # position and hitbox
+        image = pygame.Surface(dim)
         if left is not None:
-            self.x = left+ dim[0]/2
-            self.y = DISPLAY_HEIGHT - dim[1]/2
+            x = left+ dim[0]/2
+            y = DISPLAY_HEIGHT - dim[1]/2
         # default spawn at right of screen
         else:
-            self.x = DISPLAY_WIDTH + dim[0] / 2
-            self.y = DISPLAY_HEIGHT - dim[1] / 2
-        self.rect = self.image.get_rect()
-        self.rect.center = self.x, self.y
+            x = DISPLAY_WIDTH + dim[0] / 2
+            y = DISPLAY_HEIGHT - dim[1] / 2
+            
+        super().__init__(game, pos=(x, y), image=image, depth=depth)
+        
+        # graphics
+        self.color = color
+        self.image.fill(self.color)
         
         # dynamics
         self.dx = 0

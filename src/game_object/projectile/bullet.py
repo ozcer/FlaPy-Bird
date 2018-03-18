@@ -11,20 +11,11 @@ class Bullet(Dynamic):
                  pos,
                  dim=(10,10),
                  depth=-2):
-        super().__init__()
+        image = pygame.Surface(dim)
+        super().__init__(game, pos=pos, depth=depth,image=image)
         self.game = game
         
-        self.x, self.y = pos
-        self.width, self.height = dim
-        
-        self.image = pygame.Surface(dim)
         self.image.fill(YELLOW)
-        
-        self.rect = self.image.get_rect()
-        self.rect.center = self.x, self.y
-        
-        self.depth = depth
-        
         
         # kinematics
         self.dx = 8

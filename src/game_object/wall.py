@@ -5,24 +5,14 @@ from src.game_object.scenic import Scenic
 
 
 class Wall(Scenic):
-    def __init__(self,
-                 game,
+    def __init__(self, game, *,
                  pos,
                  dim,
                  depth=1):
-        super().__init__()
-        self.game = game
-
-        self.x, self.y = pos
-        self.width, self.height = dim
+        image = pygame.Surface(dim)
+        super().__init__(game, pos=pos, depth=depth, image=image)
         
-        self.image = pygame.Surface(dim)
         self.image.fill(BLACK)
-        
-        self.rect = self.image.get_rect()
-        self.rect.center = self.x, self.y
-        
-        self.depth = depth
 
         # kinematics
         self.dx = 0
@@ -39,4 +29,3 @@ class Wall(Scenic):
 
         if self.hit:
             self.image.fill(RED)
-        

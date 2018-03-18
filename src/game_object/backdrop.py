@@ -12,23 +12,19 @@ class Backdrop(Scenic):
                  dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT),
                  color=L_GREY,
                  depth=10):
-        super().__init__()
-        self.game = game
-        
-        self.image = pygame.Surface(dim)
-        self.color = color
-        self.image.fill(self.color)
-        self.depth = depth
-        
+        image = pygame.Surface(dim)
         if left is not None:
-            self.x = left + dim[0] / 2
-            self.y = BACKDROP_HEIGHT - dim[1] / 2
+            x = left + dim[0] / 2
+            y = BACKDROP_HEIGHT - dim[1] / 2
         # default spawn at right of screen
         else:
-            self.x = DISPLAY_WIDTH + dim[0] / 2
-            self.y = BACKDROP_HEIGHT - dim[1] / 2
-        self.rect = self.image.get_rect()
-        self.rect.center = self.x, self.y
+            x = DISPLAY_WIDTH + dim[0] / 2
+            y = BACKDROP_HEIGHT - dim[1] / 2
+        
+        super().__init__(game, pos=(x,y), depth=depth, image=image)
+        
+        self.color = color
+        self.image.fill(self.color)
         
         # dynamics
         self.dx = 0
