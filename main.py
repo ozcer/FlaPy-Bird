@@ -7,8 +7,8 @@ from pygame.locals import *
 
 from src.HUD import HUD
 from src.const import *
-from src.game_object.Foe.basic_foe import BasicFoe
 from src.game_object.backdrop import Backdrop
+from src.game_object.foe.basic_foe import BasicFoe
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 

@@ -3,7 +3,7 @@ import random
 import pygame
 
 from src.const import *
-from src.game_object.Foe.foe import Foe
+from src.game_object.foe.foe import Foe
 
 
 class BasicFoe(Foe):
