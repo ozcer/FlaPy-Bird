@@ -5,8 +5,7 @@ class Scenic(Dynamic):
     
     def __init__(self):
         super().__init__()
-    
-    
+
     def draw(self):
         super().draw()
     
@@ -16,6 +15,4 @@ class Scenic(Dynamic):
         self.x += -self.game.pan_speed
         
         if self.decayable():
-            #print(f"{self} decaying")
             self.kill()
-    

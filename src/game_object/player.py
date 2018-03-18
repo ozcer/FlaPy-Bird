@@ -44,7 +44,7 @@ class Player(Dynamic):
             
     def jump(self):
         self.dy -= UP_ACCEL
-        self.image = self.sprites["jump"]
+        self.image = Player.sprites["jump"]
     
     def shoot(self):
         bullet = Bullet(self.game, (self.x, self.y))
@@ -57,7 +57,7 @@ class Player(Dynamic):
         self.handle_input()
         
         if self.dy > 0:
-            self.image = self.sprites["fall"]
+            self.image = Player.sprites["fall"]
         
         # gravity
         self.dy += GRAV if self.dy < MAX_DOWN_SPEED else 0
