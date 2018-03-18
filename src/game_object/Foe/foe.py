@@ -4,18 +4,13 @@ from pygame.locals import *
 from src.const import *
 from src.game_object.dynamic import *
 
-class enemies(Dynamic):
+class Foe(Dynamic):
     depth = -4
-    def __init__(self, game):
+    def __init__(self, game, image):
         super().__init__()
         self.game = game
 
-        # sprite
-        self.sprites = {"ooze": pygame.image.load("sprites/monster1.png")}
-        self.type = {"basic"}
-
-        self.image = self.sprites["ooze"]
-
+        #Starting Position
         self.x = DISPLAY_WIDTH + 50
         self.y = DISPLAY_HEIGHT/2
 
@@ -24,9 +19,7 @@ class enemies(Dynamic):
         self.width = self.rect.width
         self.height = self.rect.height
 
-        self.dx = -1
-        self.dy = 0
-
+        #life state
         self.alive = True
 
     def draw(self):

@@ -6,11 +6,10 @@ from pygame.locals import *
 
 from src.const import *
 from src.game_object.backdrop import Backdrop
-from src.game_object.timeline import Timeline
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 from src.HUD import HUD
-from src.game_object.enemies import enemies
+from src.game_object.Foe.basicfoe import *
 
 class Game:
     
@@ -69,7 +68,7 @@ class Game:
             self.wallCd -= 1
 
             #monster creation
-            new_enemy = enemies(self)
+            new_enemy = BasicFoe(self)
             if self.monsterCd <= 0:
                 self.monsterCd = MONSTER_RATE
                 self.add_entity(new_enemy)
