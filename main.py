@@ -27,6 +27,8 @@ class Game:
         self.fps_clock = pygame.time.Clock()
         self.hud = HUD(self)
         
+        self.events = pygame.event.get()
+        
         self.set_up()
         self.run()
     
@@ -38,8 +40,6 @@ class Game:
         # init wall cd
         self.wallCd = 0 #WALL_RATE
         
-        
-
         # backdrop
         backdrop = Backdrop(self, left=0)
         self.add_entity(backdrop)
@@ -72,9 +72,9 @@ class Game:
             # fps and update display
             pygame.display.update()
             self.fps_clock.tick(FPS)
-        
             
-            for event in pygame.event.get():
+            self.events = pygame.event.get()
+            for event in self.events:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()

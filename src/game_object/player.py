@@ -3,6 +3,7 @@ from pygame.locals import *
 
 from src.const import *
 from src.game_object.dynamic import Dynamic
+from src.game_object.projectile.bullet import Bullet
 
 class Player(Dynamic):
     def __init__(self, game, pos, depth=-5):
@@ -33,17 +34,20 @@ class Player(Dynamic):
         if self.alive:
             # up
             if keys[K_w] and self.dy > -MAX_UP_SPEED:
-                self.dy -= UP_ACCEL
-                self.image = self.sprites["jump"]
+                self.jump()
+        
+        for event in self.game.events:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
+                self.shoot()
             
-            # horizontal
-            # if keys[K_d]:
-            #     self.game.pan_speed += 3
-            # elif keys[K_a]:
-            #     self.game.pan_speed = -3
-            # else:
-            #     self.dx = 0
-
+    def jump(self):
+        self.dy -= UP_ACCEL
+        self.image = self.sprites["jump"]
+    
+    def shoot(self):
+        bullet = Bullet(self.game, (self.x, self.y))
+        self.game.add_entity(bullet)
+    
     def draw(self):
         super().draw()
     
