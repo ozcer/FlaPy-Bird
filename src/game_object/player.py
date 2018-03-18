@@ -5,15 +5,16 @@ from src.const import *
 from src.game_object.dynamic import Dynamic
 from src.game_object.projectile.bullet import Bullet
 
+
 class Player(Dynamic):
+    sprites = {"jump": pygame.image.load("sprites/jump.png"),
+               "fall": pygame.image.load("sprites/fall.png")}
     def __init__(self, game, pos, depth=-5):
         super().__init__()
         self.game = game
         
         # sprites
-        self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
-                        "fall": pygame.image.load("sprites/fall.png")}
-        self.image = self.sprites["fall"]
+        self.image = Player.sprites["fall"]
         self.depth = depth
         
         # hitbox
