@@ -5,15 +5,17 @@ from src.const import *
 from src.game_object.dynamic import Dynamic
 from src.game_object.projectile.bullet import Bullet
 
+
 class Player(Dynamic):
+    sprites = {"jump": pygame.image.load("sprites/jump.png"),
+               "fall": pygame.image.load("sprites/fall.png")}
+
     def __init__(self, game, pos, depth=-5):
         super().__init__()
         self.game = game
         
         # sprites
-        self.sprites = {"jump": pygame.image.load("sprites/jump.png"),
-                        "fall": pygame.image.load("sprites/fall.png")}
-        self.image = self.sprites["fall"]
+        self.image = Player.sprites["fall"]
         self.depth = depth
         
         # hitbox
@@ -42,7 +44,7 @@ class Player(Dynamic):
             
     def jump(self):
         self.dy -= UP_ACCEL
-        self.image = self.sprites["jump"]
+        self.image = Player.sprites["jump"]
     
     def shoot(self):
         bullet = Bullet(self.game, (self.x, self.y))
@@ -55,7 +57,7 @@ class Player(Dynamic):
         self.handle_input()
         
         if self.dy > 0:
-            self.image = self.sprites["fall"]
+            self.image = Player.sprites["fall"]
         
         # gravity
         self.dy += GRAV if self.dy < MAX_DOWN_SPEED else 0

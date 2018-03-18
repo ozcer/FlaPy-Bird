@@ -1,6 +1,3 @@
-import pygame
-
-from src.const import *
 from src.game_object.dynamic import Dynamic
 
 
@@ -8,18 +5,7 @@ class Scenic(Dynamic):
     
     def __init__(self):
         super().__init__()
-    
-    
-    def decayable(self):
-        """
-        check if is too far out from main surface
-        :return: bool
-        """
-        # active zone = main surface x 2
-        active_zone = self.game.surface.get_rect().inflate(self.rect.width*2, DISPLAY_HEIGHT/2)
-        return not active_zone.colliderect(self.rect)
-    
-    
+
     def draw(self):
         super().draw()
     
@@ -29,6 +15,4 @@ class Scenic(Dynamic):
         self.x += -self.game.pan_speed
         
         if self.decayable():
-            #print(f"{self} decaying")
             self.kill()
-    
