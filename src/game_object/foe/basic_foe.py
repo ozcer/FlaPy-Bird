@@ -7,14 +7,14 @@ from src.game_object.foe.foe import Foe
 
 
 class BasicFoe(Foe):
+    spritesList = {"ooze": pygame.image.load("sprites/foesprites/foe1.png"),
+                   "tedders": pygame.image.load("sprites/foesprites/foe2.png")}
     def __init__(self,
                  game,
-                 pos=(DISPLAY_WIDTH + 50, DISPLAY_HEIGHT/2),
+                 pos=(DISPLAY_WIDTH + 50, DISPLAY_HEIGHT / 2),
                  depth=-4):
         #Sprite
-        self.sprites = {"ooze": pygame.image.load("sprites/foesprites/foe1.png"),
-                        "tedders": pygame.image.load("sprites/foesprites/foe2.png")}
-        self.image = random.choice(list(self.sprites.items()))[1]
+        self.image = random.choice(list(BasicFoe.spritesList.items()))[1]
 
         #Movement
         self.dx = -5
