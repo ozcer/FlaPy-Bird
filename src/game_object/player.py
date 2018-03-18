@@ -43,7 +43,22 @@ class Player(Dynamic):
         super().draw()
     
     def update(self):
+        super().update()
         self.handle_input()
+        
+        # limit player in screen
+        # hitting ceiling
+        if self.rect.top < 0:
+            correction = self.rect.copy()
+            correction.top = 0
+            self.x, self.y = correction.center
+        # hitting floor
+        elif self.rect.bottom > DISPLAY_HEIGHT-TL_HEIGHT:
+            correction = self.rect.copy()
+            correction.bottom = DISPLAY_HEIGHT-TL_HEIGHT
+            self.x, self.y = correction.center
+            
+            self.dy = 0
         
         if self.dy > 0:
             self.image = Player.sprites["fall"]
@@ -54,8 +69,3 @@ class Player(Dynamic):
         # off screen death
         if not (0 < self.x < DISPLAY_WIDTH and 0 < self.y < DISPLAY_HEIGHT):
             self.alive = True # False
-
-        # apply kinematics
-        self.x += self.dx
-        self.y += self.dy
-        self.rect.center = self.x, self.y

@@ -40,7 +40,7 @@ GAP_SIZE = 150
 WALL_SPEED = 2
 WALL_RATE = 125
 
-# floor
+# timeline
 TL_WIDTH = DISPLAY_WIDTH * 2
 TL_HEIGHT = 40
 
