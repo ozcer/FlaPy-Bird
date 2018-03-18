@@ -36,7 +36,7 @@ class Game:
 
     def set_up(self):
         # init player spawn
-        player = Player(self, (200, 100))
+        player = Player(self, pos=(200, 100))
         self.add_entity(player)
 
         # init wall cd
@@ -115,8 +115,9 @@ class Game:
 
         # bottom wall
         bottom_height = DISPLAY_HEIGHT - gap_bottom
-        bottom_wall = Wall(self, (DISPLAY_WIDTH + WALL_WIDTH, gap_bottom + bottom_height / 2),
-                           (WALL_WIDTH, bottom_height))
+        bottom_wall = Wall(self,
+                           pos=(DISPLAY_WIDTH + WALL_WIDTH, gap_bottom + bottom_height / 2),
+                           dim=(WALL_WIDTH, bottom_height))
         self.add_entity(bottom_wall)
 
 
