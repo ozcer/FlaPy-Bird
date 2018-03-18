@@ -1,18 +1,21 @@
-import pygame
-from pygame.locals import *
-
-from src.const import *
-from src.game_object.dynamic import *
+from src.game_object.scenic import *
 
 class Foe(Dynamic):
-    depth = -4
-    def __init__(self, game, image):
+    def __init__(self,
+                 game,
+                 pos,
+                 depth,
+                 image):
         super().__init__()
+
         self.game = game
 
+        #Sprite
+        self.depth = depth
+        self.image = image
+
         #Starting Position
-        self.x = DISPLAY_WIDTH + 50
-        self.y = DISPLAY_HEIGHT/2
+        self.x, self.y = pos
 
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
@@ -26,6 +29,15 @@ class Foe(Dynamic):
         super().draw()
 
     def update(self):
-        self.x += self.dx
-        self.y += self.dy
-        self.rect.center = self.x, self.y
+        super().update()
+
+        #health condition
+        if self.hp is 0 or self.decayable():
+            self.alive = False
+
+        if self.alive is False:
+            self.kill()
+            print("monster deleted")
+
+
+
