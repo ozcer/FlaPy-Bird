@@ -4,7 +4,6 @@ import sys
 from pygame.locals import *
 
 from src.HUD import HUD
-from src.game_object.Foe.basicfoe import *
 from src.game_object.backdrop import Backdrop
 from src.game_object.player import Player
 from src.game_object.wall import Wall
