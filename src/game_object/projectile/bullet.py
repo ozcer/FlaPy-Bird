@@ -24,13 +24,11 @@ class Bullet(Dynamic):
         self.rect.center = self.x, self.y
         
         self.depth = depth
-        
-        
+
         # kinematics
         self.dx = 8
         self.dy = 0
 
-    
     def draw(self):
         super().draw()
     

@@ -32,7 +32,6 @@ class GameObject(pygame.sprite.Sprite):
         for index, display in enumerate(displays):
             self.game.surface.blit(display, (self.x, self.y + display.get_rect().h * index))
 
-
     def decayable(self):
         """
         check if is too far out from main surface
