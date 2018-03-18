@@ -1,4 +1,4 @@
-from src.game_object.scenic import *
+from src.game_object.dynamic import Dynamic
 
 class Foe(Dynamic):
     def __init__(self,
@@ -35,9 +35,8 @@ class Foe(Dynamic):
         if self.hp is 0 or self.decayable():
             self.alive = False
 
-        if self.alive is False:
+        if not self.alive:
             self.kill()
-            print("monster deleted")
 
 
 

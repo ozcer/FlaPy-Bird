@@ -1,11 +1,9 @@
 import os
 import sys
 
-import pygame
 from pygame.locals import *
 
 from src.HUD import HUD
-from src.const import *
 from src.game_object.Foe.basicfoe import *
 from src.game_object.backdrop import Backdrop
 from src.game_object.player import Player
