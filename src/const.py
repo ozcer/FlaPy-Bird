@@ -51,3 +51,8 @@ BACKDROP_HEIGHT = DISPLAY_HEIGHT - TL_HEIGHT
 #enemies
 MONSTER_RATE = 500
 
+#Game state info
+STARTING_SCREEN = "title screen"
+GAME_SCREEN = "game screen"
+PAUSE_SCREEN = "pause menu"
+
