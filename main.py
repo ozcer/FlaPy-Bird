@@ -5,10 +5,12 @@ import sys
 import pygame
 from pygame.locals import *
 
-from src.HUD import HUD
+from src.game_object.hud.HUD import HUD
 from src.const import *
 from src.game_object.backdrop import Backdrop
 from src.game_object.foe.basic_foe import BasicFoe
+from src.game_object.hud.period import Period
+from src.game_object.hud.timeline import Timeline
 from src.game_object.player import Player
 from src.game_object.wall import Wall
 
@@ -25,10 +27,14 @@ class Game:
         self.pan_speed = PAN_SPEED
 
         self.entities = {GLOBAL_SPRITE_GROUP: pygame.sprite.Group()}
-
+    
         self.fps_clock = pygame.time.Clock()
         self.hud = HUD(self)
-
+        
+        self.timeline = Timeline(self)
+        
+        self.add_entity(self.timeline)
+        
         self.events = pygame.event.get()
 
         self.set_up()
@@ -40,10 +46,10 @@ class Game:
         self.add_entity(player)
 
         # init wall cd
-        self.wallCd = 0  # WALL_RATE
+        self.wall_cd = 0  # WALL_RATE
 
         #init monster cd
-        self.monsterCd = 5
+        self.monster_cd = 5
 
         # backdrop
         backdrop = Backdrop(self, left=0)
@@ -64,19 +70,20 @@ class Game:
                                  key=lambda sprite: sprite.depth,
                                  reverse=True):
                 sprite.draw()
+            
 
             # wall creation
-            if self.wallCd <= 0:
-                self.wallCd = WALL_RATE
+            if self.wall_cd <= 0:
+                self.wall_cd = WALL_RATE
                 self.make_walls()
-            self.wallCd -= 1
+            self.wall_cd -= 1
 
             # monster creation
             new_enemy = BasicFoe(self)
-            if self.monsterCd <= 0:
-                self.monsterCd = MONSTER_RATE
+            if self.monster_cd <= 0:
+                self.monster_cd = MONSTER_RATE
                 self.add_entity(new_enemy)
-            self.monsterCd -= 1
+            self.monster_cd -= 1
 
             # hud
             self.hud.draw()
@@ -104,7 +111,7 @@ class Game:
         self.entities[GLOBAL_SPRITE_GROUP].add(object)
 
     def make_walls(self):
-        gap_height = random.randint(GAP_SIZE / 2, DISPLAY_HEIGHT - GAP_SIZE / 2)
+        gap_height = random.randint(GAP_SIZE / 2, DISPLAY_HEIGHT - TL_HEIGHT - GAP_SIZE / 2)
         gap_top = gap_height - GAP_SIZE / 2
         gap_bottom = gap_height + GAP_SIZE / 2
 
@@ -114,7 +121,7 @@ class Game:
         # self.add_entity(top_wall)
 
         # bottom wall
-        bottom_height = DISPLAY_HEIGHT - gap_bottom
+        bottom_height = DISPLAY_HEIGHT - TL_HEIGHT - gap_bottom
         bottom_wall = Wall(self,
                            pos=(DISPLAY_WIDTH + WALL_WIDTH, gap_bottom + bottom_height / 2),
                            dim=(WALL_WIDTH, bottom_height))

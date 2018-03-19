@@ -31,7 +31,7 @@ class GameObject(pygame.sprite.Sprite):
         self.depth = depth
         
         # font for debug attributes
-        self.debug_font = pygame.font.SysFont("monospace", 17)
+        self.debug_font = pygame.font.SysFont("monospace", 12)
     
     def update(self):
         if self.decayable():
@@ -47,13 +47,13 @@ class GameObject(pygame.sprite.Sprite):
                    if not callable(getattr(self, attr))
                    and not attr.startswith("__")]
     
-        displays = []
+        attribute_surfaces = []
         for member in members:
-            displays.append(self.debug_font.render(f"{member}={getattr(self, member)}",
+            attribute_surfaces.append(self.debug_font.render(f"{member}={getattr(self, member)}",
                                                    True,
                                                    GREEN)
                             )
-        for index, display in enumerate(displays):
+        for index, display in enumerate(attribute_surfaces):
             self.game.surface.blit(display, (self.x, self.y + display.get_rect().h * index))
 
 
