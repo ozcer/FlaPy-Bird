@@ -30,12 +30,16 @@ class GameObject(pygame.sprite.Sprite):
         # draw depth, larger=more behind
         self.depth = depth
         
+        # zone which sprites doesn't delete itself
+        self.nondecay_zone = self.game.surface.get_rect()
+        
         # font for debug attributes
-        self.debug_font = pygame.font.SysFont("monospace", 17)
+        self.debug_font = pygame.font.SysFont("monospace", 12)
     
     def update(self):
         if self.decayable():
-            self.kill()
+            pass
+            #self.kill()
     
     def draw(self):
         self.game.surface.blit(self.image, self.rect)
@@ -47,13 +51,13 @@ class GameObject(pygame.sprite.Sprite):
                    if not callable(getattr(self, attr))
                    and not attr.startswith("__")]
     
-        displays = []
+        attribute_surfaces = []
         for member in members:
-            displays.append(self.debug_font.render(f"{member}={getattr(self, member)}",
+            attribute_surfaces.append(self.debug_font.render(f"{member}={getattr(self, member)}",
                                                    True,
                                                    GREEN)
                             )
-        for index, display in enumerate(displays):
+        for index, display in enumerate(attribute_surfaces):
             self.game.surface.blit(display, (self.x, self.y + display.get_rect().h * index))
 
 
@@ -63,5 +67,4 @@ class GameObject(pygame.sprite.Sprite):
         :return: bool
         """
         # active zone = main surface x 2
-        active_zone = self.game.surface.get_rect().inflate(self.rect.width*2, DISPLAY_HEIGHT/2)
-        return not active_zone.colliderect(self.rect)
+        return not self.nondecay_zone.colliderect(self.rect)

@@ -15,11 +15,10 @@ class Backdrop(Scenic):
         image = pygame.Surface(dim)
         if left is not None:
             x = left + dim[0] / 2
-            y = BACKDROP_HEIGHT - dim[1] / 2
         # default spawn at right of screen
         else:
             x = DISPLAY_WIDTH + dim[0] / 2
-            y = BACKDROP_HEIGHT - dim[1] / 2
+        y = DISPLAY_HEIGHT/2
         
         super().__init__(game, pos=(x,y), depth=depth, image=image)
         

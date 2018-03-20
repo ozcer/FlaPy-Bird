@@ -46,6 +46,7 @@ class Player(Dynamic):
         super().update()
         self.handle_input()
         
+        
         # limit player in screen
         # hitting ceiling
         if self.rect.top < 0:

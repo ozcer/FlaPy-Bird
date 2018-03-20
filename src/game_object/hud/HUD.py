@@ -1,8 +1,7 @@
 import pygame
-from pygame.locals import *
 
 from src.const import *
-from src.game_object.timeline import Timeline
+from src.game_object.hud.timeline import Timeline
 
 
 class HUD():
@@ -14,9 +13,6 @@ class HUD():
         
         self.dev_mode = False
 
-        # floor
-        floor = Timeline(self.game, left=0)
-        self.game.add_entity(floor)
 
     def mode_toggle(self):
         self.dev_mode = not self.dev_mode
@@ -27,3 +23,6 @@ class HUD():
                                                    True,
                                                    GREEN)
             self.game.surface.blit(fps_display, (DISPLAY_WIDTH-fps_display.get_width(),0))
+    
+    def update(self):
+        pass
