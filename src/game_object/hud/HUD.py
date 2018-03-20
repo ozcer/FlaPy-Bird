@@ -18,7 +18,6 @@ class HUD():
         self.dev_mode = not self.dev_mode
     
     def draw(self):
-        
         if self.dev_mode:
             fps_display = self.fonts["fps"].render(f"{round(self.game.fps_clock.get_fps())}",
                                                    True,

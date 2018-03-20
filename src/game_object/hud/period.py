@@ -18,7 +18,8 @@ class Period(Dynamic):
         super().__init__(game, pos=(x, y), depth=depth, image=image)
         
         self.name = name
-        
+        self.length = self.rect.w
+
         self.color = color
         self.image.fill(self.color)
         
@@ -28,6 +29,7 @@ class Period(Dynamic):
     def set_left(self, left):
         self.x = left + self.rect.w / 2
         self.y = DISPLAY_HEIGHT - TL_HEIGHT / 2
+        self.rect.center = (self.x, self.y)
     
     def draw(self):
         super().draw()

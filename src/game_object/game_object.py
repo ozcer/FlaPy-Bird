@@ -35,7 +35,8 @@ class GameObject(pygame.sprite.Sprite):
     
     def update(self):
         if self.decayable():
-            self.kill()
+            pass
+            #self.kill()
     
     def draw(self):
         self.game.surface.blit(self.image, self.rect)

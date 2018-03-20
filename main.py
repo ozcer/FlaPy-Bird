@@ -32,7 +32,6 @@ class Game:
         self.hud = HUD(self)
         
         self.timeline = Timeline(self)
-        
         self.add_entity(self.timeline)
         
         self.events = pygame.event.get()
@@ -42,13 +41,13 @@ class Game:
 
     def set_up(self):
         # init player spawn
-        player = Player(self, pos=(200, 100))
+        player = Player(self, pos=PLAYER_SPAWN)
         self.add_entity(player)
 
         # init wall cd
         self.wall_cd = 0  # WALL_RATE
 
-        #init monster cd
+        # init monster cd
         self.monster_cd = 5
 
         # backdrop
