@@ -70,4 +70,3 @@ class Player(Dynamic):
         # off screen death
         if not (0 < self.x < DISPLAY_WIDTH and 0 < self.y < DISPLAY_HEIGHT):
             self.alive = True # False
-        
