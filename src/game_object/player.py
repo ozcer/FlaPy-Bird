@@ -46,6 +46,7 @@ class Player(Dynamic):
         super().update()
         self.handle_input()
         
+        
         # limit player in screen
         # hitting ceiling
         if self.rect.top < 0:
@@ -69,3 +70,4 @@ class Player(Dynamic):
         # off screen death
         if not (0 < self.x < DISPLAY_WIDTH and 0 < self.y < DISPLAY_HEIGHT):
             self.alive = True # False
+        

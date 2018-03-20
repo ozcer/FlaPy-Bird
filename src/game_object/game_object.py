@@ -30,6 +30,9 @@ class GameObject(pygame.sprite.Sprite):
         # draw depth, larger=more behind
         self.depth = depth
         
+        # zone which sprites doesn't delete itself
+        self.nondecay_zone = self.game.surface.get_rect()
+        
         # font for debug attributes
         self.debug_font = pygame.font.SysFont("monospace", 12)
     
@@ -64,5 +67,4 @@ class GameObject(pygame.sprite.Sprite):
         :return: bool
         """
         # active zone = main surface x 2
-        active_zone = self.game.surface.get_rect().inflate(self.rect.width*2, DISPLAY_HEIGHT/2)
-        return not active_zone.colliderect(self.rect)
+        return not self.nondecay_zone.colliderect(self.rect)

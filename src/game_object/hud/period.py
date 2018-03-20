@@ -31,12 +31,17 @@ class Period(Dynamic):
         self.y = DISPLAY_HEIGHT - TL_HEIGHT / 2
         self.rect.center = (self.x, self.y)
     
+    def display_name(self):
+        text_surf = self.debug_font.render(f"{self.name}",
+                                           True,
+                                           BLACK)
+        text_rect = text_surf.get_rect()
+        text_rect.center = self.x, self.y
+        self.game.surface.blit(text_surf, text_rect)
+        
     def draw(self):
         super().draw()
-        name_surf = self.debug_font.render(f"{self.name}",
-                               True,
-                               BLACK)
-        self.game.surface.blit(name_surf, (self.x, self.y))
+        self.display_name()
     
     def update(self):
         super().update()

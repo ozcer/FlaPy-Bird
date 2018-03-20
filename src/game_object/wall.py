@@ -17,15 +17,9 @@ class Wall(Scenic):
         # kinematics
         self.dx = 0
         self.dy = 0
-        
-        # collision
-        self.hit = False
     
     def draw(self):
         super().draw()
     
     def update(self):
         super().update()
-
-        if self.hit:
-            self.image.fill(RED)

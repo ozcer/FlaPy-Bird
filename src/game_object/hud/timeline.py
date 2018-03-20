@@ -20,11 +20,9 @@ class Timeline(GameObject):
         
         self.queue = [] if queue is None else list(queue)
         
-        # placeholders
+        # testing purposes only
         self.colors = [RED, GREEN, YELLOW, OLIVE, L_OLIVE, D_OLIVE]
-        
         self.period_count = 1
-        
         self.add_random_period()
         self.add_random_period()
         self.add_random_period()
@@ -33,7 +31,7 @@ class Timeline(GameObject):
         
     def enqueue(self, period):
         # attach period to last period
-        # if doesn't exist, add to offscreen
+        # if doesn't exist, push to left
         last = self.get_last_period()
         new_left = 0 if last is None else last.rect.right
         period.set_left(new_left)
@@ -41,8 +39,11 @@ class Timeline(GameObject):
         self.queue.append(period)
         self.game.add_entity(period)
     
-    # for testing only
     def add_random_period(self):
+        """
+        for testing only, add random period to queue
+        :return:
+        """
         rand_color = random.choice(self.colors)
         new_period = Period(self.game,
                             length=DISPLAY_WIDTH,

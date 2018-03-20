@@ -13,6 +13,3 @@ class Scenic(Dynamic):
         super().update()
         
         self.x += -self.game.pan_speed
-        
-        if self.decayable():
-            self.kill()
