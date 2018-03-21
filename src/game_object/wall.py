@@ -13,10 +13,6 @@ class Wall(Scenic):
         super().__init__(game, pos=pos, depth=depth, image=image)
         
         self.image.fill(BLACK)
-
-        # kinematics
-        self.dx = 0
-        self.dy = 0
     
     def draw(self):
         super().draw()

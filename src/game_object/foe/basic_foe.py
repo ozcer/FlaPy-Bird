@@ -19,7 +19,6 @@ class BasicFoe(Foe):
         
         # Movement
         self.dx = -5
-        self.dy = 0
 
         # Monster Hp
         self.hp = 50

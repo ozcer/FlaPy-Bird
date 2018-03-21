@@ -14,7 +14,14 @@ class Foe(Dynamic):
 
         # life state
         self.alive = True
-
+    
+    def decayable(self):
+        """
+        Overriding decayable in GameObject
+        :return: bool
+        """
+        return self.rect.right < 0
+    
     def draw(self):
         super().draw()
 

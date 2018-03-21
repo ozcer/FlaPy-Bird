@@ -1,13 +1,12 @@
 import pygame
 
 from src.const import *
-from src.game_object.dynamic import Dynamic
+from src.game_object.projectile.projectile import Projectile
 
-
-class Bullet(Dynamic):
+class Bullet(Projectile):
     
     def __init__(self,
-                 game,
+                 game, *,
                  pos,
                  dim=(10,10),
                  depth=-2):
@@ -19,8 +18,6 @@ class Bullet(Dynamic):
         
         # kinematics
         self.dx = 8
-        self.dy = 0
-
     
     def draw(self):
         super().draw()

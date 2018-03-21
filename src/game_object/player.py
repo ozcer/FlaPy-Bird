@@ -14,10 +14,6 @@ class Player(Dynamic):
         image = Player.sprites["fall"]
         super().__init__(game, pos=pos, depth=depth, image=image)
         
-        # dynamics
-        self.dx = 0
-        self.dy = 0
-        
         self.alive = True
     
     def handle_input(self):
@@ -36,7 +32,7 @@ class Player(Dynamic):
         self.image = Player.sprites["jump"]
     
     def shoot(self):
-        bullet = Bullet(self.game, (self.x, self.y))
+        bullet = Bullet(self.game, pos=(self.x, self.y))
         self.game.add_entity(bullet)
     
     def draw(self):

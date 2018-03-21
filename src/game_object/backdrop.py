@@ -25,10 +25,6 @@ class Backdrop(Scenic):
         self.color = color
         self.image.fill(self.color)
         
-        # dynamics
-        self.dx = 0
-        self.dy = 0
-        
         self.extended = False
 
     

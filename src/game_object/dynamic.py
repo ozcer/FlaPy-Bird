@@ -5,7 +5,10 @@ class Dynamic(GameObject):
     
     def __init__(self, game, *, pos, depth, image):
         super().__init__(game, pos=pos, depth=depth, image=image)
-    
+        
+        self.dx = 0
+        self.dy = 0
+        
     def draw(self):
         super().draw()
     

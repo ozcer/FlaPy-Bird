@@ -77,7 +77,7 @@ class Timeline(GameObject):
         text_rect = text_surf.get_rect()
         text_rect.center = (self.rect.left + text_rect.w/2 + 10, self.y)
         self.game.surface.blit(text_surf, text_rect)
-        
+    
     def draw(self):
         super().draw()
         self.display_current_period()

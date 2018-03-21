@@ -38,8 +38,8 @@ class GameObject(pygame.sprite.Sprite):
     
     def update(self):
         if self.decayable():
-            pass
-            #self.kill()
+            print(f"{self} decayed")
+            self.kill()
     
     def draw(self):
         self.game.surface.blit(self.image, self.rect)
@@ -60,11 +60,9 @@ class GameObject(pygame.sprite.Sprite):
         for index, display in enumerate(attribute_surfaces):
             self.game.surface.blit(display, (self.x, self.y + display.get_rect().h * index))
 
-
     def decayable(self):
         """
-        check if is too far out from main surface
+        defauls to not decay
         :return: bool
         """
-        # active zone = main surface x 2
-        return not self.nondecay_zone.colliderect(self.rect)
+        return False

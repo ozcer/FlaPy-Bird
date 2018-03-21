@@ -1,10 +1,10 @@
 import pygame
 
 from src.const import *
-from src.game_object.dynamic import Dynamic
+from src.game_object.scenic import Scenic
 
 
-class Period(Dynamic):
+class Period(Scenic):
     def __init__(self, game, *,
                  length,
                  name,
@@ -23,7 +23,7 @@ class Period(Dynamic):
         self.color = color
         self.image.fill(self.color)
         
-        self.dx = -self.game.pan_speed
+        self.dx = 0
         self.dy = 0
     
     def set_left(self, left):
@@ -38,7 +38,8 @@ class Period(Dynamic):
         text_rect = text_surf.get_rect()
         text_rect.center = self.x, self.y
         self.game.surface.blit(text_surf, text_rect)
-        
+    
+    
     def draw(self):
         super().draw()
         self.display_name()
