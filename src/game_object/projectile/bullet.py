@@ -9,7 +9,7 @@ class Bullet(Projectile):
                  game, *,
                  pos,
                  dim=(10,10),
-                 depth=-2):
+                 depth=BULLET_DEPTH):
         image = pygame.Surface(dim)
         super().__init__(game, pos=pos, depth=depth,image=image)
         self.game = game

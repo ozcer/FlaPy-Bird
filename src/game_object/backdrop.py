@@ -11,7 +11,7 @@ class Backdrop(Scenic):
                  left=None,
                  dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT),
                  color=L_GREY,
-                 depth=10):
+                 depth=BACKDROP_DEPTH):
         image = pygame.Surface(dim)
         if left is not None:
             x = left + dim[0] / 2

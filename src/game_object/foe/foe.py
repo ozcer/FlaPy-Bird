@@ -8,7 +8,7 @@ class Foe(Dynamic):
     def __init__(self,
                  game, *,
                  pos,
-                 depth=-4,
+                 depth,
                  image):
         super().__init__(game, pos=pos, depth=depth, image=image)
 

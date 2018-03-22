@@ -13,7 +13,7 @@ class BasicFoe(Foe):
     def __init__(self,
                  game, *,
                  pos=(DISPLAY_WIDTH + 50, DISPLAY_HEIGHT / 2),
-                 depth=-4):
+                 depth=BASIC_FOE_DEPTH):
         image = random.choice(list(BasicFoe.sprites.items()))[1]
         super().__init__(game, pos=pos, depth=depth, image=image)
         
