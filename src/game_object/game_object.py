@@ -1,3 +1,4 @@
+import logging
 import pygame
 
 from src.const import *
@@ -38,7 +39,7 @@ class GameObject(pygame.sprite.Sprite):
     
     def update(self):
         if self.decayable():
-            print(f"{self} decayed")
+            logging.info(f"{self} decayed")
             self.kill()
     
     def draw(self):
@@ -66,3 +67,6 @@ class GameObject(pygame.sprite.Sprite):
         :return: bool
         """
         return False
+    
+    def __str__(self):
+        return f"{self.__class__.__name__} at {self.x, self.y}"

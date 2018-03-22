@@ -10,7 +10,7 @@ class Player(Dynamic):
     sprites = {"jump": pygame.image.load("sprites/jump.png"),
                "fall": pygame.image.load("sprites/fall.png")}
     
-    def __init__(self, game, *, pos, depth=-5):
+    def __init__(self, game, *, pos, depth=PLAYER_DEPTH):
         image = Player.sprites["fall"]
         super().__init__(game, pos=pos, depth=depth, image=image)
         

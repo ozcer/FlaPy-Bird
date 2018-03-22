@@ -1,3 +1,4 @@
+import logging
 import os
 import random
 import sys
@@ -23,7 +24,10 @@ class Game:
         pygame.init()
         pygame.display.set_caption(CAPTION)
         self.surface = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), 0, 32)
-
+        logging.basicConfig(level=LOG_LEVEL,
+                            datefmt='%m/%d/%Y %I:%M:%S%p',
+                            format='%(asctime)s %(message)s')
+        
         self.pan_speed = PAN_SPEED
 
         self.entities = {GLOBAL_SPRITE_GROUP: pygame.sprite.Group()}
@@ -105,6 +109,7 @@ class Game:
         if class_name not in self.entities:
             self.entities[class_name] = pygame.sprite.Group()
         self.entities[class_name].add(object)
+        logging.info(f"{object} created")
 
         # also add to global sprite group
         self.entities[GLOBAL_SPRITE_GROUP].add(object)

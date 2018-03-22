@@ -8,7 +8,7 @@ class Wall(Scenic):
     def __init__(self, game, *,
                  pos,
                  dim,
-                 depth=1):
+                 depth=WALL_DEPTH):
         image = pygame.Surface(dim)
         super().__init__(game, pos=pos, depth=depth, image=image)
         
