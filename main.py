@@ -55,8 +55,8 @@ class Game:
         self.monster_cd = 5
 
         # backdrop
-        backdrop = Backdrop(self, left=0)
-        self.add_entity(backdrop)
+        # backdrop = Backdrop(self, left=0)
+        # self.add_entity(backdrop)
 
     def run(self):
         while True:

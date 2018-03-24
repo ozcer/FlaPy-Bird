@@ -2,6 +2,7 @@ import logging
 import pygame
 
 from src.const import *
+from src.gfx_helpers import *
 
 
 class GameObject(pygame.sprite.Sprite):
@@ -11,6 +12,7 @@ class GameObject(pygame.sprite.Sprite):
                  pos,
                  depth,
                  image,
+                 image_scale=(1,1),
                  ):
         """
         General game object
@@ -23,6 +25,10 @@ class GameObject(pygame.sprite.Sprite):
         self.game=game
         
         # hit box and positioning
+        self.image_scale_x, self.image_scale_y = image_scale
+
+        self.set_image_scale((self.image_scale_x, self.image_scale_y))
+        
         self.x, self.y = pos
         self.image = image
         self.rect = self.image.get_rect()
@@ -78,6 +84,21 @@ class GameObject(pygame.sprite.Sprite):
             if isinstance(entity, cls) and self.rect.colliderect(entity.rect):
                 logging.info(f"{self} collided with {entity}")
                 return entity
+    
+    def set_image(self, new_sprite):
+        """
+        change sprite and recalculate rect
+        :param new_sprite: Surface
+        :return: None
+        """
+        self.image = new_sprite
+        self.rect.size = self.image.get_rect().size
+    
+    def set_image_scale(self, image_scale):
+        self.images = {name: scale_surface(image, *image_scale)
+                       for (name, image) in self.images.items()}
+    def draw_hitbox(self):
+        pygame.draw.rect(self.game.surface, GREEN, self.rect)
     
     def __str__(self):
         return f"{self.__class__.__name__} at {self.x, self.y}"
