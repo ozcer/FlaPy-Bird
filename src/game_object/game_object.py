@@ -79,5 +79,17 @@ class GameObject(pygame.sprite.Sprite):
                 logging.info(f"{self} collided with {entity}")
                 return entity
     
+    def set_image(self, new_sprite):
+        """
+        change sprite and recalculate rect
+        :param new_sprite: Surface
+        :return: None
+        """
+        self.image = new_sprite
+        self.rect.size = self.image.get_rect().size
+    
+    def draw_hitbox(self):
+        pygame.draw.rect(self.game.surface, GREEN, self.rect)
+    
     def __str__(self):
         return f"{self.__class__.__name__} at {self.x, self.y}"

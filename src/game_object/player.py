@@ -2,21 +2,28 @@ import pygame
 from pygame.locals import *
 
 from src.const import *
+from src.gfx_helpers import *
 from src.game_object.dynamic import Dynamic
 from src.game_object.hud.timeline import Timeline
 from src.game_object.projectile.bullet import Bullet
 
 
 class Player(Dynamic):
-    sprites = {"jump": pygame.image.load("sprites/jump.png"),
-               "fall": pygame.image.load("sprites/fall.png")}
+    images = {"jump": pygame.image.load("sprites/jump.png"),
+              "fall": pygame.image.load("sprites/fall.png")}
     
     def __init__(self, game, *, pos, depth=PLAYER_DEPTH):
-        image = Player.sprites["fall"]
+        self.image_scale_x = 2
+        self.image_scale_y = 2
+        
+        self.images = {name: scale_surface(image, self.image_scale_x, self.image_scale_y)
+                       for (name, image) in Player.images.items()}
+
+        image = self.images["fall"]
         super().__init__(game, pos=pos, depth=depth, image=image)
         
         self.hp = 200
-    
+        
     def is_alive(self):
         return self.hp > 0
     
@@ -53,13 +60,14 @@ class Player(Dynamic):
     
     def jump(self):
         self.dy -= PLAYER_JUMP_POWER
-        self.image = Player.sprites["jump"]
+        self.set_image(self.images["jump"])
     
     def shoot(self):
         bullet = Bullet(self.game, pos=(self.x, self.y))
         self.game.add_entity(bullet)
     
     def draw(self):
+        self.draw_hitbox()
         super().draw()
     
     def update(self):
@@ -78,11 +86,10 @@ class Player(Dynamic):
             correction = self.rect.copy()
             correction.bottom = DISPLAY_HEIGHT - TIMELINE_HEIGHT
             self.x, self.y = correction.center
-            
             self.dy = 0
         
         if self.dy > 0:
-            self.image = Player.sprites["fall"]
+            self.set_image(self.images["fall"])
         
         # gravity
         if not self._on_ground():
