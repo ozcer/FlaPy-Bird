@@ -1,6 +1,7 @@
 import pygame
 
 from src.game_object.dynamic import Dynamic
+from src.game_object.foe.foe import Foe
 
 
 class Projectile(Dynamic):

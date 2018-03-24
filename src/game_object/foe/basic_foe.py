@@ -12,7 +12,7 @@ class BasicFoe(Foe):
 
     def __init__(self,
                  game, *,
-                 pos=(DISPLAY_WIDTH + 50, DISPLAY_HEIGHT / 2),
+                 pos,
                  depth=BASIC_FOE_DEPTH):
         image = random.choice(list(BasicFoe.sprites.items()))[1]
         super().__init__(game, pos=pos, depth=depth, image=image)
@@ -21,10 +21,11 @@ class BasicFoe(Foe):
         self.dx = -5
 
         # Monster Hp
-        self.hp = 50
+        self.hp = 100
 
     def draw(self):
         super().draw()
 
     def update(self):
         super().update()
+

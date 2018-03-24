@@ -82,7 +82,7 @@ class Game:
             self.wall_cd -= 1
 
             # monster creation
-            new_enemy = BasicFoe(self)
+            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, PLAYER_SPAWN[1]))
             if self.monster_cd <= 0:
                 self.monster_cd = MONSTER_RATE
                 self.add_entity(new_enemy)

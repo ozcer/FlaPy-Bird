@@ -1,7 +1,7 @@
 import pygame
 
 from src.game_object.dynamic import Dynamic
-
+from src.const import *
 
 class Foe(Dynamic):
 
@@ -11,9 +11,6 @@ class Foe(Dynamic):
                  depth,
                  image):
         super().__init__(game, pos=pos, depth=depth, image=image)
-
-        # life state
-        self.alive = True
     
     def decayable(self):
         """
@@ -24,15 +21,14 @@ class Foe(Dynamic):
     
     def draw(self):
         super().draw()
-
+    
+    def is_alive(self):
+        return self.hp > 0
+    
     def update(self):
         super().update()
-
-        # health condition
-        if self.hp is 0:
-            self.alive = False
-
-        if not self.alive:
+        
+        if not self.is_alive():
             self.kill()
 
 
