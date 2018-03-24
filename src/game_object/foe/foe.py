@@ -3,6 +3,7 @@ import pygame
 from src.game_object.dynamic import Dynamic
 from src.const import *
 
+
 class Foe(Dynamic):
 
     def __init__(self,

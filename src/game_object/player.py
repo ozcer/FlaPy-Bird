@@ -3,6 +3,7 @@ from pygame.locals import *
 
 from src.const import *
 from src.game_object.dynamic import Dynamic
+from src.game_object.hud.timeline import Timeline
 from src.game_object.projectile.bullet import Bullet
 
 
@@ -14,21 +15,44 @@ class Player(Dynamic):
         image = Player.sprites["fall"]
         super().__init__(game, pos=pos, depth=depth, image=image)
         
-        self.alive = True
+        self.hp = 200
+    
+    def is_alive(self):
+        return self.hp > 0
     
     def handle_input(self):
+        # keyboard input
         keys = pygame.key.get_pressed()
-        if self.alive:
-            # up
-            if keys[K_w] and self.dy > -MAX_UP_SPEED:
-                self.jump()
+        if keys[K_w] and self._on_ground():
+            self.jump()
         
+        # left click
         for event in self.game.events:
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
+                pass
+            if event.type == KEYDOWN and event.key == K_j:
                 self.shoot()
-            
+    
+    def _on_ground(self):
+        # make a rect with height of 1 pixel
+        # put it under the player and see if that collides with timeline
+        detect_rect = pygame.Rect((0, 0), (self.rect.w, 1))
+        detect_rect.top = self.rect.bottom
+        for entity in self.game.entities[GLOBAL_SPRITE_GROUP]:
+            if isinstance(entity, Timeline) and detect_rect.colliderect(entity.rect):
+                return True
+        return False
+    
+    def _gravity(self):
+        """
+        affect subject with gravitational forces
+        :return: None
+        """
+        if self.dy < MAX_DOWN_SPEED:
+            self.dy += GRAV
+    
     def jump(self):
-        self.dy -= UP_ACCEL
+        self.dy -= PLAYER_JUMP_POWER
         self.image = Player.sprites["jump"]
     
     def shoot(self):
@@ -40,8 +64,8 @@ class Player(Dynamic):
     
     def update(self):
         super().update()
-        self.handle_input()
-        
+        if self.is_alive():
+            self.handle_input()
         
         # limit player in screen
         # hitting ceiling
@@ -61,8 +85,5 @@ class Player(Dynamic):
             self.image = Player.sprites["fall"]
         
         # gravity
-        self.dy += GRAV if self.dy < MAX_DOWN_SPEED else 0
-        
-        # off screen death
-        if not (0 < self.x < DISPLAY_WIDTH and 0 < self.y < DISPLAY_HEIGHT):
-            self.alive = True # False
+        if not self._on_ground():
+            self._gravity()

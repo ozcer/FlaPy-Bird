@@ -6,7 +6,7 @@ DISPLAY_HEIGHT = 540
 START_WINDOW_POS = (100,100)
 
 # logging
-LOG_LEVEL = "DEBUG"
+LOG_LEVEL = "NOTSET"
 
 # colors
 WHITE = (255, 255, 255)
@@ -22,14 +22,13 @@ D_OLIVE = (82, 76, 0)
 L_OLIVE = (180, 166, 71)
 
 # physics
-GRAV = .4
+GRAV = .5
 
 # game
 PAN_SPEED = 3
 
 # spritegroup
 GLOBAL_SPRITE_GROUP = "ALL"
-
 
 # DEPTHS
 PLAYER_DEPTH = -5
@@ -43,11 +42,11 @@ BULLET_DEPTH = -2
 
 
 # player
-UP_ACCEL = 1
+PLAYER_JUMP_POWER = 10
 PLAYER_SPAWN = (200,100)
 
 MAX_UP_SPEED = 4
-MAX_DOWN_SPEED = 8
+MAX_DOWN_SPEED = 10
 
 # wall
 WALL_WIDTH = 30
