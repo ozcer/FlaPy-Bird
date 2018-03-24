@@ -10,7 +10,6 @@ from src.game_object.projectile.bullet import Bullet
 
 class Player(Dynamic):
     
-    
     def __init__(self, game, *,
                  pos,
                  depth=PLAYER_DEPTH,
@@ -65,7 +64,7 @@ class Player(Dynamic):
         self.game.add_entity(bullet)
     
     def draw(self):
-        self.draw_hitbox()
+        #self.draw_hitbox()
         super().draw()
     
     def update(self):
