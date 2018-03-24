@@ -68,5 +68,16 @@ class GameObject(pygame.sprite.Sprite):
         """
         return False
     
+    def collide_with_class(self, cls):
+        """
+        return a list of instances of the class that self is colliding with
+        :param cls: class to check collision against
+        :return: [pygame.sprite]
+        """
+        for entity in self.game.entities[GLOBAL_SPRITE_GROUP]:
+            if isinstance(entity, cls) and self.rect.colliderect(entity.rect):
+                logging.info(f"{self} collided with {entity}")
+                return entity
+    
     def __str__(self):
         return f"{self.__class__.__name__} at {self.x, self.y}"

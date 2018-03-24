@@ -1,6 +1,7 @@
 import pygame
 
 from src.const import *
+from src.game_object.foe.foe import Foe
 from src.game_object.projectile.projectile import Projectile
 
 class Bullet(Projectile):
@@ -18,6 +19,8 @@ class Bullet(Projectile):
         
         # kinematics
         self.dx = 8
+        
+        self.damage = 35
     
     def draw(self):
         super().draw()
@@ -25,3 +28,7 @@ class Bullet(Projectile):
     def update(self):
         super().update()
 
+        collidee = self.collide_with_class(Foe)
+        if collidee:
+            collidee.hp -= self.damage
+            self.kill()
