@@ -74,9 +74,9 @@ class Player(Dynamic):
             correction.top = 0
             self.x, self.y = correction.center
         # hitting floor
-        elif self.rect.bottom > DISPLAY_HEIGHT-TL_HEIGHT:
+        elif self.rect.bottom > DISPLAY_HEIGHT-TIMELINE_HEIGHT:
             correction = self.rect.copy()
-            correction.bottom = DISPLAY_HEIGHT-TL_HEIGHT
+            correction.bottom = DISPLAY_HEIGHT - TIMELINE_HEIGHT
             self.x, self.y = correction.center
             
             self.dy = 0

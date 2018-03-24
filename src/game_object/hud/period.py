@@ -12,9 +12,9 @@ class Period(Scenic):
                  depth=PERIOD_DEPTH,
                  color=OLIVE,
                  ):
-        image = pygame.Surface((length, TL_HEIGHT))
+        image = pygame.Surface((length, TIMELINE_HEIGHT))
         x = left + length / 2
-        y = DISPLAY_HEIGHT - TL_HEIGHT / 2
+        y = DISPLAY_HEIGHT - TIMELINE_HEIGHT / 2
         super().__init__(game, pos=(x, y), depth=depth, image=image)
         
         self.name = name
@@ -28,7 +28,7 @@ class Period(Scenic):
     
     def set_left(self, left):
         self.x = left + self.rect.w / 2
-        self.y = DISPLAY_HEIGHT - TL_HEIGHT / 2
+        self.y = DISPLAY_HEIGHT - TIMELINE_HEIGHT / 2
         self.rect.center = (self.x, self.y)
     
     def display_name(self):
