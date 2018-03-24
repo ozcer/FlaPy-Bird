@@ -82,7 +82,9 @@ class Game:
             self.wall_cd -= 1
 
             # monster creation
-            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, PLAYER_SPAWN[1]))
+            random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -150,
+                                           DISPLAY_HEIGHT - TIMELINE_HEIGHT -50)
+            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, random_height))
             if self.monster_cd <= 0:
                 self.monster_cd = MONSTER_RATE
                 self.add_entity(new_enemy)
@@ -115,7 +117,7 @@ class Game:
         self.entities[GLOBAL_SPRITE_GROUP].add(object)
 
     def make_walls(self):
-        gap_height = random.randint(GAP_SIZE / 2, DISPLAY_HEIGHT - TL_HEIGHT - GAP_SIZE / 2)
+        gap_height = random.randint(GAP_SIZE / 2, DISPLAY_HEIGHT - TIMELINE_HEIGHT - GAP_SIZE / 2)
         gap_top = gap_height - GAP_SIZE / 2
         gap_bottom = gap_height + GAP_SIZE / 2
 
@@ -125,7 +127,7 @@ class Game:
         # self.add_entity(top_wall)
 
         # bottom wall
-        bottom_height = DISPLAY_HEIGHT - TL_HEIGHT - gap_bottom
+        bottom_height = DISPLAY_HEIGHT - TIMELINE_HEIGHT - gap_bottom
         bottom_wall = Wall(self,
                            pos=(DISPLAY_WIDTH + WALL_WIDTH, gap_bottom + bottom_height / 2),
                            dim=(WALL_WIDTH, bottom_height))

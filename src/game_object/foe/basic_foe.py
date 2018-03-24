@@ -21,7 +21,7 @@ class BasicFoe(Foe):
         self.dx = -5
 
         # Monster Hp
-        self.hp = 100
+        self.hp = 50
 
     def draw(self):
         super().draw()
