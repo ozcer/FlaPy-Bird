@@ -9,18 +9,16 @@ from src.game_object.projectile.bullet import Bullet
 
 
 class Player(Dynamic):
-    images = {"jump": pygame.image.load("sprites/jump.png"),
-              "fall": pygame.image.load("sprites/fall.png")}
     
-    def __init__(self, game, *, pos, depth=PLAYER_DEPTH):
-        self.image_scale_x = 2
-        self.image_scale_y = 2
-        
-        self.images = {name: scale_surface(image, self.image_scale_x, self.image_scale_y)
-                       for (name, image) in Player.images.items()}
-
+    
+    def __init__(self, game, *,
+                 pos,
+                 depth=PLAYER_DEPTH,
+                 image_scale=(2,2)):
+        self.images = {"jump": pygame.image.load("sprites/jump.png"),
+                  "fall": pygame.image.load("sprites/fall.png")}
         image = self.images["fall"]
-        super().__init__(game, pos=pos, depth=depth, image=image)
+        super().__init__(game, pos=pos, depth=depth, image=image, image_scale=image_scale)
         
         self.hp = 200
         

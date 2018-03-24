@@ -14,8 +14,8 @@ class BasicFoe(Foe):
                  game, *,
                  pos,
                  depth=BASIC_FOE_DEPTH):
-        image = random.choice(list(BasicFoe.sprites.items()))[1]
-        super().__init__(game, pos=pos, depth=depth, image=image)
+        self.images = {0: random.choice(list(BasicFoe.sprites.items()))[1]}
+        super().__init__(game, pos=pos, depth=depth, image=self.images[0])
         
         # Movement
         self.dx = -5

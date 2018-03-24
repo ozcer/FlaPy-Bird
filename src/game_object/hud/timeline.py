@@ -10,11 +10,11 @@ from src.game_object.hud.period import Period
 class Timeline(GameObject):
     
     def __init__(self, game, *, queue=None, depth=TIMELINE_DEPTH):
-        image = pygame.Surface((TL_WIDTH, TIMELINE_HEIGHT))
-        image.set_alpha(0)
+        self.images = {0: pygame.Surface((TL_WIDTH, TIMELINE_HEIGHT))}
+        self.images[0].set_alpha(0)
         x = DISPLAY_WIDTH / 2
         y = DISPLAY_HEIGHT - TIMELINE_HEIGHT / 2
-        super().__init__(game, pos=(x, y), depth=depth, image=image)
+        super().__init__(game, pos=(x, y), depth=depth, image=self.images[0])
 
         self.debug_font = pygame.font.SysFont("monospace", 20, bold=True)
         
