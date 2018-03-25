@@ -16,8 +16,8 @@ class Player(Dynamic):
                  image_scale=(2.5,2.5)):
         self.images = {"jump": pygame.image.load("sprites/jump.png"),
                        "fall": pygame.image.load("sprites/fall.png")}
-        init_image = self.images["fall"]
-        super().__init__(game, pos=pos, depth=depth, image=init_image, image_scale=image_scale)
+        init_image_key = "fall"
+        super().__init__(game, pos=pos, depth=depth, init_image_key=init_image_key, image_scale=image_scale)
         
         self.hp = 200
         

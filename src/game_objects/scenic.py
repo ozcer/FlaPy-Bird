@@ -3,8 +3,11 @@ from src.game_objects.dynamic import Dynamic
 
 class Scenic(Dynamic):
     
-    def __init__(self, game, *, pos, depth, image):
-        super().__init__(game, pos=pos, depth=depth, image=image)
+    def __init__(self, game, *, pos, depth, init_image_key):
+        super().__init__(game,
+                         pos=pos,
+                         depth=depth,
+                         init_image_key=init_image_key)
     
     def decayable(self):
         """

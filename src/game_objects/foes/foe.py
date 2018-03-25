@@ -11,12 +11,12 @@ class Foe(Dynamic):
                  pos,
                  script,
                  depth,
-                 image,
+                 init_image_key,
                  image_scale=(1,1)):
         super().__init__(game,
                          pos=pos,
                          depth=depth,
-                         image=image,
+                         init_image_key=init_image_key,
                          image_scale=image_scale)
         self.script = script
         self.script.host = self

@@ -20,7 +20,7 @@ class Backdrop(Scenic):
             x = DISPLAY_WIDTH + dim[0] / 2
         y = DISPLAY_HEIGHT/2
         
-        super().__init__(game, pos=(x,y), depth=depth, image=image)
+        super().__init__(game, pos=(x,y), depth=depth, init_image_key=image)
         
         self.color = color
         self.image.fill(self.color)

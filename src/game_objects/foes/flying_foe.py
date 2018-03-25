@@ -11,12 +11,17 @@ class FlyingFoe(Foe):
                  game, *,
                  pos,
                  script=None,
-                 depth=BASIC_FOE_DEPTH):
+                 depth=BASIC_FOE_DEPTH,
+                 image_scale=(2,2),):
         script = FlySinusoidal(4, 100, 500, *pos) if script is None else script
         self.images = {"tedders": pygame.image.load("sprites/foesprites/foe2.png")}
 
-        init_image = self.images["tedders"]
-        super().__init__(game, pos=pos, script=script, depth=depth, image=init_image)
+        super().__init__(game,
+                         pos=pos,
+                         script=script,
+                         depth=depth,
+                         init_image_key="tedders",
+                         image_scale=image_scale)
 
         # Monster Hp
         self.hp = 50

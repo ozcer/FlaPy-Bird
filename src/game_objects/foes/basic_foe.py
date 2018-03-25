@@ -14,10 +14,16 @@ class BasicFoe(Foe):
                  game, *,
                  pos,
                  script=FlyStraight(5),
-                 depth=BASIC_FOE_DEPTH):
+                 depth=BASIC_FOE_DEPTH,
+                 image_scale=(2,2),):
         self.images = {"ooze": pygame.image.load("sprites/foesprites/foe1.png")}
-        init_image = self.images["ooze"]
-        super().__init__(game, pos=pos, script=script, depth=depth, image=init_image)
+
+        super().__init__(game,
+                         pos=pos,
+                         script=script,
+                         depth=depth,
+                         init_image_key="ooze",
+                         image_scale=image_scale)
         
         # Monster Hp
         self.hp = 50

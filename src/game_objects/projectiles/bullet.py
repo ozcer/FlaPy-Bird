@@ -11,8 +11,8 @@ class Bullet(Projectile):
                  pos,
                  dim=(10,10),
                  depth=BULLET_DEPTH):
-        self.images = {0: pygame.Surface(dim)}
-        super().__init__(game, pos=pos, depth=depth,image=self.images[0])
+        self.images = {"init": pygame.Surface(dim)}
+        super().__init__(game, pos=pos, depth=depth, init_image_key="init")
         self.game = game
         
         self.image.fill(YELLOW)

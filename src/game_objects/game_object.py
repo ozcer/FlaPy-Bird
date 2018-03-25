@@ -10,7 +10,7 @@ class GameObject(pygame.sprite.Sprite):
                  game, *,
                  pos,
                  depth,
-                 image=None,
+                 init_image_key=None,
                  image_scale=(1,1),
                  ):
         """
@@ -18,7 +18,7 @@ class GameObject(pygame.sprite.Sprite):
         :param game: Game
         :param pos: (x,y)
         :param depth: int
-        :param image: pygame.Surface
+        :param init_image_key: key in self.images for initial image
         :param image_scale: (float x_scale, float y_scale)
         """
         super().__init__()
@@ -29,7 +29,7 @@ class GameObject(pygame.sprite.Sprite):
         self.set_image_scale((self.image_scale_x, self.image_scale_y))
         
         self.x, self.y = pos
-        self.image = image
+        self.image = self.images[init_image_key]
         self.rect = self.image.get_rect()
         self.rect.center = self.x, self.y
         
