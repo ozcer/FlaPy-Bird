@@ -37,24 +37,6 @@ class Player(Dynamic):
             if event.type == KEYDOWN and event.key == K_j:
                 self.shoot()
     
-    def _on_ground(self):
-        # make a rect with height of 1 pixel
-        # put it under the player and see if that collides with timeline
-        detect_rect = pygame.Rect((0, 0), (self.rect.w, 1))
-        detect_rect.top = self.rect.bottom
-        for entity in self.game.entities[GLOBAL_SPRITE_GROUP]:
-            if isinstance(entity, Timeline) and detect_rect.colliderect(entity.rect):
-                return True
-        return False
-    
-    def _gravity(self):
-        """
-        affect subject with gravitational forces
-        :return: None
-        """
-        if self.dy < MAX_DOWN_SPEED:
-            self.dy += GRAV
-    
     def jump(self):
         self.dy -= PLAYER_JUMP_POWER
         self.set_image(self.images["jump"])

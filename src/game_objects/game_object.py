@@ -1,5 +1,4 @@
 import logging
-import pygame
 
 from src.const import *
 from src.gfx_helpers import *
@@ -37,8 +36,8 @@ class GameObject(pygame.sprite.Sprite):
         # draw depth, larger=more behind
         self.depth = depth
         
-        # zone which sprites doesn't delete itself
-        self.nondecay_zone = self.game.surface.get_rect()
+        # # zone which sprites doesn't delete itself
+        # self.nondecay_zone = self.game.surface.get_rect()
         
         # font for debug attributes
         self.debug_font = pygame.font.SysFont("monospace", 12)
@@ -84,6 +83,22 @@ class GameObject(pygame.sprite.Sprite):
             if isinstance(entity, cls) and self.rect.colliderect(entity.rect):
                 logging.info(f"{self} collided with {entity}")
                 return entity
+
+    def _on_ground(self):
+        # make a rect with height of 1 pixel
+        # put it under the player and see if that collides with timeline
+        detect_rect = pygame.Rect((0, 0), (self.rect.w, 1))
+        detect_rect.top = self.rect.bottom
+        
+        return detect_rect.colliderect(self.game.timeline.rect)
+
+    def _gravity(self):
+        """
+        affect subject with gravitational forces
+        :return: None
+        """
+        if self.dy < MAX_DOWN_SPEED:
+            self.dy += GRAV
     
     def set_image(self, new_sprite):
         """
@@ -97,6 +112,7 @@ class GameObject(pygame.sprite.Sprite):
     def set_image_scale(self, image_scale):
         self.images = {name: scale_surface(image, *image_scale)
                        for (name, image) in self.images.items()}
+
     def draw_hitbox(self):
         pygame.draw.rect(self.game.surface, GREEN, self.rect)
     
