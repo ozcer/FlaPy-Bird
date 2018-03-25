@@ -3,9 +3,9 @@ from pygame.locals import *
 
 from src.const import *
 from src.gfx_helpers import *
-from src.game_object.dynamic import Dynamic
-from src.game_object.hud.timeline import Timeline
-from src.game_object.projectile.bullet import Bullet
+from src.game_objects.dynamic import Dynamic
+from src.game_objects.hud.timeline import Timeline
+from src.game_objects.projectiles.bullet import Bullet
 
 
 class Player(Dynamic):
@@ -15,9 +15,9 @@ class Player(Dynamic):
                  depth=PLAYER_DEPTH,
                  image_scale=(2.5,2.5)):
         self.images = {"jump": pygame.image.load("sprites/jump.png"),
-                  "fall": pygame.image.load("sprites/fall.png")}
-        image = self.images["fall"]
-        super().__init__(game, pos=pos, depth=depth, image=image, image_scale=image_scale)
+                       "fall": pygame.image.load("sprites/fall.png")}
+        init_image_key = "fall"
+        super().__init__(game, pos=pos, depth=depth, init_image_key=init_image_key, image_scale=image_scale)
         
         self.hp = 200
         
@@ -36,24 +36,6 @@ class Player(Dynamic):
                 pass
             if event.type == KEYDOWN and event.key == K_j:
                 self.shoot()
-    
-    def _on_ground(self):
-        # make a rect with height of 1 pixel
-        # put it under the player and see if that collides with timeline
-        detect_rect = pygame.Rect((0, 0), (self.rect.w, 1))
-        detect_rect.top = self.rect.bottom
-        for entity in self.game.entities[GLOBAL_SPRITE_GROUP]:
-            if isinstance(entity, Timeline) and detect_rect.colliderect(entity.rect):
-                return True
-        return False
-    
-    def _gravity(self):
-        """
-        affect subject with gravitational forces
-        :return: None
-        """
-        if self.dy < MAX_DOWN_SPEED:
-            self.dy += GRAV
     
     def jump(self):
         self.dy -= PLAYER_JUMP_POWER

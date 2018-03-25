@@ -1,6 +1,6 @@
 import pygame
 
-from src.game_object.dynamic import Dynamic
+from src.game_objects.dynamic import Dynamic
 from src.const import *
 
 
@@ -9,9 +9,17 @@ class Foe(Dynamic):
     def __init__(self,
                  game, *,
                  pos,
+                 script,
                  depth,
-                 image):
-        super().__init__(game, pos=pos, depth=depth, image=image)
+                 init_image_key,
+                 image_scale=(1,1)):
+        super().__init__(game,
+                         pos=pos,
+                         depth=depth,
+                         init_image_key=init_image_key,
+                         image_scale=image_scale)
+        self.script = script
+        self.script.host = self
     
     def decayable(self):
         """
@@ -28,7 +36,7 @@ class Foe(Dynamic):
     
     def update(self):
         super().update()
-        
+        self.script.update()
         if not self.is_alive():
             self.kill()
 

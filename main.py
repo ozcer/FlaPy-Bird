@@ -6,14 +6,17 @@ import sys
 import pygame
 from pygame.locals import *
 
-from src.game_object.hud.HUD import HUD
+from src.game_objects.foes.flying_foe import FlyingFoe
+from src.game_objects.foes.scripts.fly_sinusoidal import FlySinusoidal
+from src.game_objects.foes.scripts.fly_straight import FlyStraight
+from src.game_objects.hud.HUD import HUD
 from src.const import *
-from src.game_object.backdrop import Backdrop
-from src.game_object.foe.basic_foe import BasicFoe
-from src.game_object.hud.period import Period
-from src.game_object.hud.timeline import Timeline
-from src.game_object.player import Player
-from src.game_object.wall import Wall
+from src.game_objects.backdrop import Backdrop
+from src.game_objects.foes.basic_foe import BasicFoe
+from src.game_objects.hud.period import Period
+from src.game_objects.hud.timeline import Timeline
+from src.game_objects.player import Player
+from src.game_objects.wall import Wall
 
 
 class Game:
@@ -82,9 +85,13 @@ class Game:
             self.wall_cd -= 1
 
             # monster creation
-            random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -150,
-                                           DISPLAY_HEIGHT - TIMELINE_HEIGHT -50)
-            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, random_height))
+            random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -250,
+                                           DISPLAY_HEIGHT - TIMELINE_HEIGHT -100)
+            pos = (DISPLAY_WIDTH+50, random_height)
+            
+            foe_type = random.choice([BasicFoe, FlyingFoe])
+            new_enemy = foe_type(self,
+                                 pos=pos,)
             if self.monster_cd <= 0:
                 self.monster_cd = MONSTER_RATE
                 self.add_entity(new_enemy)

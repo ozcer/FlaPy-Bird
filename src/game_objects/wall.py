@@ -1,7 +1,7 @@
 import pygame
 
 from src.const import *
-from src.game_object.scenic import Scenic
+from src.game_objects.scenic import Scenic
 
 
 class Wall(Scenic):
@@ -9,8 +9,8 @@ class Wall(Scenic):
                  pos,
                  dim,
                  depth=WALL_DEPTH):
-        self.images = {0: pygame.Surface(dim)}
-        super().__init__(game, pos=pos, depth=depth, image=self.images[0])
+        self.images = {"init": pygame.Surface(dim)}
+        super().__init__(game, pos=pos, depth=depth, init_image_key="init")
         
         self.image.fill(BLACK)
     
