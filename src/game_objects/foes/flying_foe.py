@@ -12,7 +12,7 @@ class FlyingFoe(Foe):
                  pos,
                  script=None,
                  depth=BASIC_FOE_DEPTH,
-                 image_scale=(2,2),):
+                 image_scale=(1.5,1.5),):
         script = FlySinusoidal(4, 100, 500, *pos) if script is None else script
         self.images = {"tedders": pygame.image.load("sprites/foesprites/foe2.png")}
 
