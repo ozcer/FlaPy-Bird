@@ -9,8 +9,10 @@ class FlySinusoidal:
         self.period = period
         self.x_shift = x_shift
         self.y_shift = y_shift
-        # y = amplitude * cos(period * x)
 
     def update(self):
         self.host.dx = -self.speed
+        
+        # QuickMath()
+        # y = amplitude * cos(2pi * x / period - phase shift) + vertical shift
         self.host.y = self.amplitude * sin(2 * pi * self.host.x / self.period - self.x_shift) + self.y_shift
