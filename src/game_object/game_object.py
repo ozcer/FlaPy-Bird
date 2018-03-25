@@ -11,7 +11,7 @@ class GameObject(pygame.sprite.Sprite):
                  game, *,
                  pos,
                  depth,
-                 image,
+                 image=None,
                  image_scale=(1,1),
                  ):
         """
@@ -20,13 +20,13 @@ class GameObject(pygame.sprite.Sprite):
         :param pos: (x,y)
         :param depth: int
         :param image: pygame.Surface
+        :param image_scale: (float x_scale, float y_scale)
         """
         super().__init__()
         self.game=game
         
         # hit box and positioning
         self.image_scale_x, self.image_scale_y = image_scale
-
         self.set_image_scale((self.image_scale_x, self.image_scale_y))
         
         self.x, self.y = pos

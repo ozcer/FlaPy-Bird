@@ -10,8 +10,13 @@ class Foe(Dynamic):
                  game, *,
                  pos,
                  depth,
-                 image):
-        super().__init__(game, pos=pos, depth=depth, image=image)
+                 image,
+                 image_scale=(1,1)):
+        super().__init__(game,
+                         pos=pos,
+                         depth=depth,
+                         image=image,
+                         image_scale=image_scale)
     
     def decayable(self):
         """
