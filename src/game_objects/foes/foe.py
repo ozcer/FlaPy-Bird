@@ -1,6 +1,6 @@
 import pygame
 
-from src.game_object.dynamic import Dynamic
+from src.game_objects.dynamic import Dynamic
 from src.const import *
 
 

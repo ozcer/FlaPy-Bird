@@ -1,8 +1,8 @@
 import pygame
 
 from src.const import *
-from src.game_object.foe.foe import Foe
-from src.game_object.projectile.projectile import Projectile
+from src.game_objects.foes.foe import Foe
+from src.game_objects.projectiles.projectile import Projectile
 
 class Bullet(Projectile):
     

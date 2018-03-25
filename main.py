@@ -6,14 +6,14 @@ import sys
 import pygame
 from pygame.locals import *
 
-from src.game_object.hud.HUD import HUD
+from src.game_objects.hud.HUD import HUD
 from src.const import *
-from src.game_object.backdrop import Backdrop
-from src.game_object.foe.basic_foe import BasicFoe
-from src.game_object.hud.period import Period
-from src.game_object.hud.timeline import Timeline
-from src.game_object.player import Player
-from src.game_object.wall import Wall
+from src.game_objects.backdrop import Backdrop
+from src.game_objects.foes.basic_foe import BasicFoe
+from src.game_objects.hud.period import Period
+from src.game_objects.hud.timeline import Timeline
+from src.game_objects.player import Player
+from src.game_objects.wall import Wall
 
 
 class Game:

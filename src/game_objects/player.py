@@ -3,9 +3,9 @@ from pygame.locals import *
 
 from src.const import *
 from src.gfx_helpers import *
-from src.game_object.dynamic import Dynamic
-from src.game_object.hud.timeline import Timeline
-from src.game_object.projectile.bullet import Bullet
+from src.game_objects.dynamic import Dynamic
+from src.game_objects.hud.timeline import Timeline
+from src.game_objects.projectiles.bullet import Bullet
 
 
 class Player(Dynamic):

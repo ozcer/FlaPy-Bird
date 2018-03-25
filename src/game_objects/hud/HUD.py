@@ -1,7 +1,7 @@
 import pygame
 
 from src.const import *
-from src.game_object.hud.timeline import Timeline
+from src.game_objects.hud.timeline import Timeline
 
 
 class HUD():

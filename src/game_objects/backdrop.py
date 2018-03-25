@@ -1,8 +1,8 @@
 import pygame
 
 from src.const import *
-from src.game_object.scenic import Scenic
-from src.game_object.dynamic import Dynamic
+from src.game_objects.scenic import Scenic
+from src.game_objects.dynamic import Dynamic
 
 
 class Backdrop(Scenic):

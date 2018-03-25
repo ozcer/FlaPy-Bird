@@ -3,8 +3,8 @@ import random
 import pygame
 
 from src.const import *
-from src.game_object.game_object import GameObject
-from src.game_object.hud.period import Period
+from src.game_objects.game_object import GameObject
+from src.game_objects.hud.period import Period
 
 
 class Timeline(GameObject):
