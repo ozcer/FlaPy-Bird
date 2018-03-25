@@ -9,6 +9,7 @@ class Foe(Dynamic):
     def __init__(self,
                  game, *,
                  pos,
+                 script,
                  depth,
                  image,
                  image_scale=(1,1)):
@@ -17,6 +18,8 @@ class Foe(Dynamic):
                          depth=depth,
                          image=image,
                          image_scale=image_scale)
+        self.script = script
+        self.script.host = self
     
     def decayable(self):
         """
@@ -33,7 +36,7 @@ class Foe(Dynamic):
     
     def update(self):
         super().update()
-        
+        self.script.update()
         if not self.is_alive():
             self.kill()
 

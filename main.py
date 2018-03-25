@@ -6,6 +6,7 @@ import sys
 import pygame
 from pygame.locals import *
 
+from src.game_objects.foes.scripts.fly_straight import FlyStraight
 from src.game_objects.hud.HUD import HUD
 from src.const import *
 from src.game_objects.backdrop import Backdrop
@@ -84,7 +85,7 @@ class Game:
             # monster creation
             random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -150,
                                            DISPLAY_HEIGHT - TIMELINE_HEIGHT -50)
-            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, random_height))
+            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, random_height), script=FlyStraight(5))
             if self.monster_cd <= 0:
                 self.monster_cd = MONSTER_RATE
                 self.add_entity(new_enemy)
