@@ -1,4 +1,3 @@
-from src.const import *
 
 class FlyStraight:
     

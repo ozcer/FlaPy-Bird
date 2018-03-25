@@ -6,6 +6,7 @@ import sys
 import pygame
 from pygame.locals import *
 
+from src.game_objects.foes.scripts.fly_sinusoidal import FlySinusoidal
 from src.game_objects.foes.scripts.fly_straight import FlyStraight
 from src.game_objects.hud.HUD import HUD
 from src.const import *
@@ -83,9 +84,12 @@ class Game:
             self.wall_cd -= 1
 
             # monster creation
-            random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -150,
-                                           DISPLAY_HEIGHT - TIMELINE_HEIGHT -50)
-            new_enemy = BasicFoe(self, pos=(DISPLAY_WIDTH, random_height), script=FlyStraight(5))
+            random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -250,
+                                           DISPLAY_HEIGHT - TIMELINE_HEIGHT -100)
+            pos = (DISPLAY_WIDTH, random_height)
+            new_enemy = BasicFoe(self,
+                                 pos=pos,
+                                 script=FlySinusoidal(4, 100, 500, *pos))
             if self.monster_cd <= 0:
                 self.monster_cd = MONSTER_RATE
                 self.add_entity(new_enemy)
