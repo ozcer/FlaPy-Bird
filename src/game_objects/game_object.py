@@ -1,6 +1,7 @@
 import logging
 
 from src.const import *
+from src.game_objects.timers.flash import Flash
 from src.gfx_helpers import *
 
 
@@ -41,17 +42,27 @@ class GameObject(pygame.sprite.Sprite):
         
         # font for debug attributes
         self.debug_font = pygame.font.SysFont("monospace", 12)
-    
+        
+        self.timers = []
+        
     def update(self):
+        for timer in self.timers:
+            timer.update()
+        self.timers = [timer for timer in self.timers if timer.duration > 0]
+        
         if self.decayable():
             logging.info(f"{self} decayed")
             self.kill()
     
     def draw(self):
         self.game.surface.blit(self.image, self.rect)
+        
+        for timer in self.timers:
+            timer.draw()
+        
         if self.game.hud.dev_mode:
             self.show_attributes()
-        
+            
     def show_attributes(self):
         members = [attr for attr in dir(self)
                    if not callable(getattr(self, attr))
@@ -115,6 +126,18 @@ class GameObject(pygame.sprite.Sprite):
 
     def draw_hitbox(self):
         pygame.draw.rect(self.game.surface, GREEN, self.rect)
+    
+    def overlay_color(self, color, alpha=255):
+        mask = pygame.mask.from_surface(self.image)
+        outline = mask.outline()
+        mask_surf = pygame.Surface(self.rect.size)
+        pygame.draw.polygon(mask_surf, color, outline, 0)
+        mask_surf.set_colorkey((0, 0, 0))
+        mask_surf.set_alpha(alpha)
+        self.game.surface.blit(mask_surf, self.rect)
+    
+    def damaged_flash(self):
+        self.timers.append(Flash(self, 500, max_alpha=100))
     
     def __str__(self):
         return f"{self.__class__.__name__} at {self.x, self.y}"

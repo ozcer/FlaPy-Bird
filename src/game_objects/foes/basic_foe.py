@@ -26,10 +26,11 @@ class BasicFoe(Foe):
                          image_scale=image_scale)
         
         # Monster Hp
-        self.hp = 50
+        self.hp = 200
 
     def draw(self):
         super().draw()
+
 
     def update(self):
         super().update()
