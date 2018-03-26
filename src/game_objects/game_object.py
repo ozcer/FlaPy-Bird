@@ -43,8 +43,6 @@ class GameObject(pygame.sprite.Sprite):
         # font for debug attributes
         self.debug_font = pygame.font.SysFont("monospace", 12)
         
-        self.flash_time = 0
-        
         self.timers = []
         
     def update(self):
@@ -65,7 +63,6 @@ class GameObject(pygame.sprite.Sprite):
         if self.game.hud.dev_mode:
             self.show_attributes()
             
-        
     def show_attributes(self):
         members = [attr for attr in dir(self)
                    if not callable(getattr(self, attr))
