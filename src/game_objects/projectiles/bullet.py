@@ -31,4 +31,5 @@ class Bullet(Projectile):
         collidee = self.collide_with_class(Foe)
         if collidee:
             collidee.hp -= self.damage
+            collidee.damaged_flash()
             self.kill()
