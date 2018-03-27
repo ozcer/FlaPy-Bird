@@ -13,9 +13,9 @@ class Backdrop(Scenic):
                  color=L_GREY,
                  depth=BACKDROP_DEPTH):
         image = pygame.Surface(dim)
+        # default spawn at right of screen
         if left is not None:
             x = left + dim[0] / 2
-        # default spawn at right of screen
         else:
             x = DISPLAY_WIDTH + dim[0] / 2
         y = DISPLAY_HEIGHT/2

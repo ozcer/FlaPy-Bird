@@ -7,8 +7,7 @@ from src.gfx_helpers import *
 
 class GameObject(pygame.sprite.Sprite):
     
-    def __init__(self,
-                 game, *,
+    def __init__(self, game, *args,
                  pos,
                  depth,
                  init_image_key=None,
