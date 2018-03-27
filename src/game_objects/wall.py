@@ -5,12 +5,9 @@ from src.game_objects.scenic import Scenic
 
 
 class Wall(Scenic):
-    def __init__(self, game, *,
-                 pos,
-                 dim,
-                 depth=WALL_DEPTH):
+    def __init__(self, *args, dim, depth=WALL_DEPTH, **kwargs):
         self.images = {"init": pygame.Surface(dim)}
-        super().__init__(game, pos=pos, depth=depth, init_image_key="init")
+        super().__init__(*args, depth=depth, init_image_key="init", **kwargs)
         
         self.image.fill(BLACK)
     
