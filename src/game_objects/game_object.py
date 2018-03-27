@@ -10,7 +10,7 @@ class GameObject(pygame.sprite.Sprite):
     def __init__(self, game, *args,
                  pos,
                  depth,
-                 init_image_key=None,
+                 init_image_key="init",
                  image_scale=(1,1),
                  ):
         """

@@ -13,7 +13,6 @@ class HUD():
         
         self.dev_mode = False
 
-
     def mode_toggle(self):
         self.dev_mode = not self.dev_mode
     

@@ -9,7 +9,7 @@ from src.game_objects.hud.period import Period
 
 class Timeline(GameObject):
     
-    def __init__(self, game, *, queue=None, depth=TIMELINE_DEPTH):
+    def __init__(self, game, *args, queue=None, depth=TIMELINE_DEPTH):
         self.images = {"init": pygame.Surface((TL_WIDTH, TIMELINE_HEIGHT))}
         self.images["init"].set_alpha(0)
         x = DISPLAY_WIDTH / 2

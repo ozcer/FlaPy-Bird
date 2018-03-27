@@ -5,7 +5,7 @@ from src.game_objects.scenic import Scenic
 
 
 class Period(Scenic):
-    def __init__(self, game, *,
+    def __init__(self, game, *args,
                  length,
                  name,
                  left=DISPLAY_WIDTH,
