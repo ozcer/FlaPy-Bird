@@ -1,6 +1,7 @@
 import pygame
 from src.game_objects.game_object import GameObject
 
+
 class Dynamic(GameObject):
     
     def __init__(self, *args, **kwargs):

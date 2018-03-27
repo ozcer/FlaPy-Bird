@@ -7,11 +7,12 @@ from src.game_objects.dynamic import Dynamic
 
 class Backdrop(Scenic):
     
-    def __init__(self, game,
+    def __init__(self, *args,
                  left=None,
                  dim=(BACKDROP_WIDTH, BACKDROP_HEIGHT),
                  color=L_GREY,
                  depth=BACKDROP_DEPTH):
+        raise Exception("DECPRECATED")
         image = pygame.Surface(dim)
         # default spawn at right of screen
         if left is not None:
@@ -20,7 +21,7 @@ class Backdrop(Scenic):
             x = DISPLAY_WIDTH + dim[0] / 2
         y = DISPLAY_HEIGHT/2
         
-        super().__init__(game, pos=(x,y), depth=depth, init_image_key=image)
+        super().__init__(*args, pos=(x,y), depth=depth, init_image_key=image)
         
         self.color = color
         self.image.fill(self.color)
