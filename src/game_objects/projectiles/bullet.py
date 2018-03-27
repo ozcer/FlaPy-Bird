@@ -6,14 +6,12 @@ from src.game_objects.projectiles.projectile import Projectile
 
 class Bullet(Projectile):
     
-    def __init__(self,
-                 game, *,
-                 pos,
+    def __init__(self, *args,
                  dim=(10,10),
-                 depth=BULLET_DEPTH):
+                 depth=BULLET_DEPTH,
+                 **kwargs):
         self.images = {"init": pygame.Surface(dim)}
-        super().__init__(game, pos=pos, depth=depth, init_image_key="init")
-        self.game = game
+        super().__init__(*args, depth=depth, init_image_key="init", **kwargs)
         
         self.image.fill(YELLOW)
         

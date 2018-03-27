@@ -10,15 +10,15 @@ from src.game_objects.projectiles.bullet import Bullet
 
 class Player(Dynamic):
     
-    def __init__(self, game, *,
-                 pos,
-                 depth=PLAYER_DEPTH,
-                 image_scale=(2.5,2.5)):
+    def __init__(self, *args, depth=PLAYER_DEPTH, image_scale=(2.5,2.5), **kwargs):
         self.images = {"jump": pygame.image.load("sprites/jump.png"),
                        "fall": pygame.image.load("sprites/fall.png")}
         init_image_key = "fall"
-        super().__init__(game, pos=pos, depth=depth, init_image_key=init_image_key, image_scale=image_scale)
-        
+        super().__init__(*args,
+                         depth=depth,
+                         init_image_key=init_image_key,
+                         image_scale=image_scale,
+                         **kwargs)
         self.hp = 200
         
     def is_alive(self):

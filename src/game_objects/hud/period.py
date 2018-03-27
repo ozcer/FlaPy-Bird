@@ -5,7 +5,7 @@ from src.game_objects.scenic import Scenic
 
 
 class Period(Scenic):
-    def __init__(self, game, *,
+    def __init__(self, *args,
                  length,
                  name,
                  left=DISPLAY_WIDTH,
@@ -15,7 +15,7 @@ class Period(Scenic):
         self.images = {"init": pygame.Surface((length, TIMELINE_HEIGHT))}
         x = left + length / 2
         y = DISPLAY_HEIGHT - TIMELINE_HEIGHT / 2
-        super().__init__(game, pos=(x, y), depth=depth, init_image_key="init")
+        super().__init__(*args, pos=(x, y), depth=depth, init_image_key="init")
         
         self.name = name
         self.length = self.rect.w

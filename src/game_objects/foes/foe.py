@@ -6,18 +6,8 @@ from src.const import *
 
 class Foe(Dynamic):
 
-    def __init__(self,
-                 game, *,
-                 pos,
-                 script,
-                 depth,
-                 init_image_key,
-                 image_scale=(1,1)):
-        super().__init__(game,
-                         pos=pos,
-                         depth=depth,
-                         init_image_key=init_image_key,
-                         image_scale=image_scale)
+    def __init__(self, *args, script, **kwargs):
+        super().__init__(*args, **kwargs)
         self.script = script
         self.script.host = self
     
