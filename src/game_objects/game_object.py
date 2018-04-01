@@ -55,6 +55,7 @@ class GameObject(pygame.sprite.Sprite):
             self.kill()
     
     def draw(self):
+        #self.draw_hitbox()
         self.game.surface.blit(self.image, self.rect)
         
         for timer in self.timers:
@@ -62,7 +63,9 @@ class GameObject(pygame.sprite.Sprite):
         
         if self.game.hud.dev_mode:
             self.show_attributes()
-            
+        
+        
+        
     def show_attributes(self):
         members = [attr for attr in dir(self)
                    if not callable(getattr(self, attr))
@@ -138,6 +141,17 @@ class GameObject(pygame.sprite.Sprite):
     
     def damaged_flash(self):
         self.timers.append(Flash(self, 500, max_alpha=100))
+    
+    def gravitate(self):
+        if self.rect.bottom > DISPLAY_HEIGHT - TIMELINE_HEIGHT:
+            correction = self.rect.copy()
+            correction.bottom = DISPLAY_HEIGHT - TIMELINE_HEIGHT
+            self.x, self.y = correction.center
+            self.dy = 0
+    
+        # gravity
+        if not self._on_ground():
+            self._gravity()
     
     def __str__(self):
         return f"{self.__class__.__name__} at {self.x, self.y}"

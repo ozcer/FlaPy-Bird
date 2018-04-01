@@ -13,6 +13,7 @@ class Wall(Scenic):
     
     def draw(self):
         super().draw()
-    
+
     def update(self):
         super().update()
+        self.gravitate()
