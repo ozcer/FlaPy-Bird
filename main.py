@@ -9,6 +9,7 @@ from pygame.locals import *
 from src.game_objects.foes.flying_foe import FlyingFoe
 from src.game_objects.foes.scripts.fly_sinusoidal import FlySinusoidal
 from src.game_objects.foes.scripts.fly_straight import FlyStraight
+from src.game_objects.foes.wall_boss import WallBoss
 from src.game_objects.hud.HUD import HUD
 from src.const import *
 from src.game_objects.backdrop import Backdrop
@@ -57,9 +58,8 @@ class Game:
         # init monster cd
         self.monster_cd = 5
 
-        # backdrop
-        # backdrop = Backdrop(self, left=0)
-        # self.add_entity(backdrop)
+        wall_boss = WallBoss(self, pos=(1500, 250))
+        self.add_entity(wall_boss)
 
     def run(self):
         while True:
@@ -77,12 +77,6 @@ class Game:
                                  reverse=True):
                 sprite.draw()
             
-
-            # wall creation
-            if self.wall_cd <= 0:
-                self.wall_cd = WALL_RATE
-                self.make_walls()
-            self.wall_cd -= 1
 
             # monster creation
             random_height = random.randint(DISPLAY_HEIGHT - TIMELINE_HEIGHT -250,
@@ -122,23 +116,6 @@ class Game:
 
         # also add to global sprite group
         self.entities[GLOBAL_SPRITE_GROUP].add(object)
-
-    def make_walls(self):
-        gap_height = random.randint(GAP_SIZE / 2, DISPLAY_HEIGHT - TIMELINE_HEIGHT - GAP_SIZE / 2)
-        gap_top = gap_height - GAP_SIZE / 2
-        gap_bottom = gap_height + GAP_SIZE / 2
-
-        # # top wall
-        # top_height = gap_top
-        # top_wall = Wall(self, (DISPLAY_WIDTH+WALL_WIDTH, top_height / 2), (WALL_WIDTH, top_height))
-        # self.add_entity(top_wall)
-
-        # bottom wall
-        bottom_height = DISPLAY_HEIGHT - TIMELINE_HEIGHT - gap_bottom
-        bottom_wall = Wall(self,
-                           pos=(DISPLAY_WIDTH + WALL_WIDTH, gap_bottom + bottom_height / 2),
-                           dim=(WALL_WIDTH, bottom_height))
-        self.add_entity(bottom_wall)
 
 
 if __name__ == "__main__":
